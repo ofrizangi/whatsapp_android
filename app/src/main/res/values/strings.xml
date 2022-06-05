@@ -11,6 +11,9 @@
     <string name="to_register">Do not have an account? click here to</string>
     <string name="register_link"><u>Register</u> </string>
 
+    <string name="to_sign">Already have an account? click here to</string>
+    <string name="sign_link"><u>Sign in</u> </string>
+
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>

@@ -2,28 +2,33 @@ package com.example.whatsappandriodclient;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.whatsappandriodclient.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
 
 
-//    private ActivityLoginBinding binding;
+    private ActivityLoginBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
 
-        setContentView(R.layout.activity_login);
+        setContentView(binding.getRoot());
+//        register_link = findViewById(R.id.link);
 
-        Button register_link = findViewById(R.id.link);
 
-        register_link.setOnClickListener(v -> {
-            Intent intent = new Intent(this, RegisterActivity.class);
-            startActivity(intent);
-        });
+        binding.link.setOnClickListener(v ->{
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+
+                startActivity(intent);
+            }
+        );
+
+
 
     }
 
