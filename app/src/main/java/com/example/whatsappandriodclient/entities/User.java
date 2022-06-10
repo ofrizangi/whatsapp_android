@@ -1,23 +1,37 @@
 package com.example.whatsappandriodclient.entities;
 
 
-import java.util.ArrayList;
+import androidx.room.Entity;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 //import
-//@Entity
+@Entity(tableName="users")
 public class User {
+    @SerializedName("userName")
+    @Expose
     private String userName;
+    @Expose
+    @SerializedName("nickName")
     private String nickName;
+    @SerializedName("password")
+    @Expose
     private String password;
+    @SerializedName("image")
+    @Expose
     private String image;
+    @SerializedName("contacts")
+    @Expose
     private List<Contact> contacts;
 
-    public User(String userName,  String nickName, String password, String image) {
+    public User(String userName,  String nickName, String password, String image, List<Contact> contacts) {
         this.userName = userName;
         this.nickName = nickName;
         this.password = password;
         this.image = image;
-        this.contacts = new ArrayList<>();
+        this.contacts = contacts;
     }
 
 

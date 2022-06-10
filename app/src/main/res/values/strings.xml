@@ -20,5 +20,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="BaseUrl">https://10.0.2.2:7271/api/</string>
+    <string name="add_image">add image</string>
+    <string name="server">Server</string>
+    <string name="add_contact">Add Contact</string>
 
 </resources>

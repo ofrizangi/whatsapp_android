@@ -1,15 +1,14 @@
 package com.example.whatsappandriodclient.api;
 
 import com.example.whatsappandriodclient.entities.User;
+import com.example.whatsappandriodclient.entities.UserLogin;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 
 public interface WebServiceAPI {
 
@@ -17,7 +16,11 @@ public interface WebServiceAPI {
      Call<List<User>> getUser();
 
      @POST("user/register")
-     Call<Void> createUser(@Body User user);
+     Call<String> createUser(@Body User user);
+
+     @POST("user/login")
+     Call<String> sendUser(@Body UserLogin userLogin);
+
 
 
  }
