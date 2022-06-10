@@ -19,17 +19,20 @@
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/refreshLayout">
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/listcontacts" />
+        tools:layout_editor_absoluteX="-49dp"
+        tools:layout_editor_absoluteY="16dp">
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/listcontacts"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent" />-->
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
-
-
+<ListView
+    android:id="@+id/listcontacts"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

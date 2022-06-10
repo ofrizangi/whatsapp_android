@@ -3,21 +3,22 @@ package com.example.whatsappandriodclient.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+
 import com.google.gson.annotations.SerializedName;
 
 @Entity
 public class Contact {
     @PrimaryKey(autoGenerate = true)
-    @SerializedName("id")
+//    @SerializedName("id")
 //    @ColumnInfo(name= "id")
     private int id;
-    @SerializedName("contactUserName")
+//    @SerializedName("contactUserName")
 //    @ColumnInfo(name= "contactUserName")
     private String contactUserName;
-    @SerializedName("contactNickName")
+//    @SerializedName("contactNickName")
 //    @ColumnInfo(name= "contactNickName")
     private String contactNickName;
-    @SerializedName("server")
+//    @SerializedName("server")
 //    @ColumnInfo(name= "server")
     private String server;
 
@@ -61,4 +62,13 @@ public class Contact {
         this.server = server;
     }
 
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "id=" + id +
+                ", contactUserName='" + contactUserName + '\'' +
+                ", contactNickName='" + contactNickName + '\'' +
+                ", server='" + server + '\'' +
+                '}';
+    }
 }

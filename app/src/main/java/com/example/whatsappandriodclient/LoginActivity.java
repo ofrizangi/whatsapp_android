@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 String token = response.body();
-                Log.i("in response", token);
+//                Log.i("in response", token);
                 if(token.compareTo("false") == 0){
                     AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
                     alert.setTitle("error");

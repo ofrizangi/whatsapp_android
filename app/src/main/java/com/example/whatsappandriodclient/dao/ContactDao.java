@@ -13,22 +13,21 @@ import java.util.List;
 @Dao
 public interface ContactDao {
 
-    @Query("SELECT * from contact")
+    @Query("SELECT * FROM contact")
     List<Contact> index();
 
-    @Query("SELECT * from contact WHERE id = :id")
+    @Query("SELECT * FROM contact WHERE id = :id")
     Contact get(int id);
 
 //    @Transaction
-    @Insert
-    
-    void insert(Contact...contacts);
+    @Insert  //get list of contact
+    void insert(Contact... contacts);
 
     @Update
-    void update(Contact...contacts);
+    void update(Contact... contacts);
 
     @Delete
-    void delete(Contact...contacts);
+    void delete(Contact... contacts);
 
 
 //    @Insert
