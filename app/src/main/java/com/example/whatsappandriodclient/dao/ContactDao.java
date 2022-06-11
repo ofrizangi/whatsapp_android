@@ -29,8 +29,7 @@ public interface ContactDao {
     @Delete
     void delete(Contact... contacts);
 
-
-
+//
 //    @Insert
 //    void insertMessages(List<Message> messages);
 

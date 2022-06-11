@@ -22,8 +22,6 @@ public class ContactAPI {
     WebServiceAPI webServiceAPI;
 
     public ContactAPI() {
-
-
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:5271/api/")
                 .addConverterFactory(ScalarsConverterFactory.create())

@@ -7,7 +7,6 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.room.Room;
 
 import com.example.whatsappandriodclient.adapters.ContactListAdapter;
 import com.example.whatsappandriodclient.dao.ContactDao;
@@ -50,11 +49,11 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
 
         viewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
 
-        db = Room.databaseBuilder(getApplicationContext(), LocalDB.class, "ContactDB")
-                .allowMainThreadQueries()
-                .build();
-
-        contactDao = db.contactDao();
+//        db = Room.databaseBuilder(getApplicationContext(), LocalDB.class, "ContactDB")
+//                .allowMainThreadQueries()
+//                .build();
+//
+//        contactDao = db.contactDao();
 
         binding.addcontact.setOnClickListener(v -> {
                     Intent myIntent = new Intent(getApplicationContext(), AddContactActivity.class);

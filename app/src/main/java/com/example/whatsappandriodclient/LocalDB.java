@@ -10,8 +10,8 @@ import androidx.room.RoomDatabase;
 import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.entities.Contact;
 
-//@Database(entities = {Contact.class}, version = 2, exportSchema = false)
 @Database(entities = {Contact.class}, version = 2)
+//@Database(entities = {Contact.class, Message.class}, version = 2, exportSchema = false)
 
 public abstract class LocalDB extends RoomDatabase {
 

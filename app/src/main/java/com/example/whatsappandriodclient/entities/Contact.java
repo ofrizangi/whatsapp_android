@@ -20,7 +20,6 @@ public class Contact {
     private String server;
 
     public Contact( String contactUserName, String contactNickName, String server) {
-        this.id = id;
         this.contactUserName = contactUserName;
         this.contactNickName = contactNickName;
         this.server = server;
