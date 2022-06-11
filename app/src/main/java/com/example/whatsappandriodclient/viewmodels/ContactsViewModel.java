@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.whatsappandriodclient.entities.Contact;
+import com.example.whatsappandriodclient.entities.ContactToAdd;
 import com.example.whatsappandriodclient.repositories.ContactRepository;
 
 import java.util.List;
@@ -17,15 +18,25 @@ public class ContactsViewModel extends ViewModel {
     private LiveData<List<Contact>> contactList;
 
 
+
+
     public ContactsViewModel(){
         this.cRepository = new ContactRepository();
         this.contactList = cRepository.getAll();
     }
 
-
-
     public LiveData<List<Contact>> get(){
         return contactList;
+    }
+
+
+    public Contact getAContact(int position){
+        return contactList.getValue().get(position);
+    }
+
+
+    public void addContact(String token , ContactToAdd contact){
+        this.cRepository.addContact(contact,  token);
     }
 
 

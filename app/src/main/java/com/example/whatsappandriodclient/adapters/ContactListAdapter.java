@@ -16,27 +16,41 @@ import java.util.List;
 public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ContactViewHolder> {
 
 
-    class ContactViewHolder extends RecyclerView.ViewHolder {
+    class ContactViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final TextView contactNickName;
+        private OnContactListener onContactListener;
+//        private final ImageView image;
 
-        private ContactViewHolder(View itemView){
+        private ContactViewHolder(View itemView, OnContactListener onContactListener){
             super(itemView);
             this.contactNickName = itemView.findViewById(R.id.contactname);
+//            this.image = itemView.findViewById(R.id.imageView);
+//            this.image.setClipToOutline(true);
+            this.onContactListener = onContactListener;
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            onContactListener.onContactClick(getAdapterPosition());
         }
     }
 
     private final LayoutInflater minflater;
     private List<Contact> contacts;
+    private OnContactListener onContactListener;
 
-    public ContactListAdapter(Context context){
+    public ContactListAdapter(Context context, OnContactListener onContactListener){
         minflater = LayoutInflater.from(context);
+        this.onContactListener = onContactListener;
     }
 
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup parent , int viewType){
         View itemView = minflater.inflate(R.layout.contact_in_list, parent, false);
-        return new ContactViewHolder(itemView);
+        return new ContactViewHolder(itemView, this.onContactListener);
     }
 
     @Override
@@ -64,7 +78,9 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     }
 
 
-
+    public interface OnContactListener {
+        void onContactClick(int position);
+    }
 
 
 

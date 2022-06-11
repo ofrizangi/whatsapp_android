@@ -114,19 +114,6 @@ public class RegisterActivity extends AppCompatActivity {
                 setImage(uri);
                 Log.i("image", uri.toString());
                 binding.imageView.setImageURI(uri);
-//                String[] info = {MediaStore.Images.Media.DATA};
-//                Cursor cursor = getContentResolver().query(uri, info, null, null, null);
-//                if(cursor != null) {
-//                    cursor.moveToFirst();
-//                    Bitmap bitmap = null;
-//                    try {
-//                        bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                    // Set the ImageView with the bitmap of the image
-//                    binding.imageView.setImageBitmap(bitmap);
-//                }
             }
         }
 
@@ -168,25 +155,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
-
-    //    private void getUsers(){
-//        Call<List<User>> call = UserAPI.getInstance().getMyApi().getUser();
-//        call.enqueue(new Callback<List<User>>() {
-//            @Override
-//            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-//                Log.i("in response", "succeed");
-//
-//                List<User> post = response.body();
-//                Log.i("sdsd", post.toString());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<User>> call, Throwable t) {
-//                Log.i("in fail", "fail");
-//
-//            }
-//        });
-//    }
 
 
 }

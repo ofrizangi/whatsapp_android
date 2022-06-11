@@ -30,6 +30,7 @@ public interface ContactDao {
     void delete(Contact... contacts);
 
 
+
 //    @Insert
 //    void insertMessages(List<Message> messages);
 

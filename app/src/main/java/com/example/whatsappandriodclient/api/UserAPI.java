@@ -28,9 +28,6 @@ public class UserAPI {
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
 
-
-
-
     public static synchronized UserAPI getInstance() {
         if (instance == null) {
             instance = new UserAPI();

@@ -3,9 +3,6 @@ package com.example.whatsappandriodclient.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-
-import com.google.gson.annotations.SerializedName;
-
 @Entity
 public class Contact {
     @PrimaryKey(autoGenerate = true)
@@ -22,7 +19,7 @@ public class Contact {
 //    @ColumnInfo(name= "server")
     private String server;
 
-    public Contact(int id, String contactUserName, String contactNickName, String server) {
+    public Contact( String contactUserName, String contactNickName, String server) {
         this.id = id;
         this.contactUserName = contactUserName;
         this.contactNickName = contactNickName;

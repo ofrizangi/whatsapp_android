@@ -3,9 +3,10 @@ package com.example.whatsappandriodclient.repositories;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.whatsappandriodclient.api.UserAPI;
+import com.example.whatsappandriodclient.api.ContactAPI;
 import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.entities.Contact;
+import com.example.whatsappandriodclient.entities.ContactToAdd;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,7 +15,7 @@ public class ContactRepository {
 
     private ContactDao contactDao;
     private ContactListData contactListData;
-    private UserAPI api;
+    private ContactAPI api;
 
 
     public ContactRepository(){
@@ -26,10 +27,10 @@ public class ContactRepository {
 //        LocalDB db = Room.databaseBuilder(getApplicationContext(), LocalDB.class,  "contact").
 //                allowMainThreadQueries().build();
 
-//        LocalDB db = LocalDB.getInstance();
+//        LocalDB db = LocalDB.getDatabase(ChatListActivity.class);
 //        this.contactDao = db.contactDao();
         this.contactListData = new ContactListData();
-//        this.api = UserAPI.getInstance();
+        this.api = ContactAPI.getInstance();
     }
 
 
@@ -41,9 +42,15 @@ public class ContactRepository {
             List<Contact> contacts = new LinkedList<>();
 
             // if we work with room instead of all this we can do go to the db in the onActive function
-            contacts.add(new Contact(1,"ofri", "ofri", "localhost" ));
-            contacts.add(new Contact(2,"sivan", "sivan", "localhost" ));
-            contacts.add(new Contact(3,"dcs", "ds", "localhost" ));
+            contacts.add(new Contact("ofri", "ofri", "localhost" ));
+            contacts.add(new Contact("sivan", "sivan", "localhost" ));
+            contacts.add(new Contact("dcs", "ds", "localhost" ));
+            contacts.add(new Contact("ofri", "ofri", "localhost" ));
+            contacts.add(new Contact("sivan", "sivan", "localhost" ));
+            contacts.add(new Contact("dcs", "ds", "localhost" ));
+            contacts.add(new Contact("ofri", "ofri", "localhost" ));
+            contacts.add(new Contact("sivan", "sivan", "localhost" ));
+            contacts.add(new Contact("dcs", "ds", "localhost" ));
 
             // every time we will do set it will call all the observers
             setValue(contacts);
@@ -64,9 +71,9 @@ public class ContactRepository {
         return this.contactListData;
     }
 
-//    public void addContact(final Contact contact){
-//        this.api.add(contact);
-//    }
+    public void addContact(final ContactToAdd contact, final String token){
+        this.api.addContact(contact, token);
+    }
 
 
 
