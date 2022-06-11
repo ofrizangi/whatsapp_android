@@ -41,7 +41,7 @@ public class ContactAPI {
         return webServiceAPI;
     }
 
-    public void addContact(ContactToAdd contact, String token) {
+    public void addContact(ContactToAdd contact, String token, String userName) {
         Call<Void> call = this.webServiceAPI.addContact("Bearer " + token, contact);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -53,6 +53,7 @@ public class ContactAPI {
                     Intent myIntent = new Intent(AddContactActivity.getInstance(), ChatListActivity.class);
                     myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     myIntent.putExtra("token", token);
+                    myIntent.putExtra("userName", userName);
                     AddContactActivity.getInstance().startActivity(myIntent);
                 }
                 else{

@@ -13,6 +13,7 @@ import com.example.whatsappandriodclient.adapters.ContactListAdapter;
 import com.example.whatsappandriodclient.databinding.ActivityChatListBinding;
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.viewmodels.UserViewModel;
+import com.example.whatsappandriodclient.viewmodels.UserViewModelFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,7 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
             Log.i("chat", intent.getStringExtra("userName"));
         }
 
-        viewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        viewModel = new ViewModelProvider(this, new UserViewModelFactory(intent.getStringExtra("userName"))).get(UserViewModel.class);
 
 //        db = Room.databaseBuilder(getApplicationContext(), LocalDB.class, "ContactDB")
 //                .allowMainThreadQueries()

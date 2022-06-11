@@ -2,28 +2,27 @@ package com.example.whatsappandriodclient.repositories;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.room.Room;
 
 import com.example.whatsappandriodclient.ChatListActivity;
 import com.example.whatsappandriodclient.LocalDB;
-import com.example.whatsappandriodclient.api.ContactAPI;
-//import com.example.whatsappandriodclient.dao.ContactDao;
-import com.example.whatsappandriodclient.dao.ContactDao;
+import com.example.whatsappandriodclient.api.UserAPI;
+import com.example.whatsappandriodclient.dao.UserDao;
 import com.example.whatsappandriodclient.entities.Contact;
-import com.example.whatsappandriodclient.entities.ContactToAdd;
+import com.example.whatsappandriodclient.entities.ContactsOfUser;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class UserRepository {
 
-    private ContactDao contactDao;
+    private UserDao userDao;
     private ContactListData contactListData;
-    private ContactAPI api;
+    private UserAPI api;
+    private String userName;
 
 
-    public UserRepository(){
+    public UserRepository(String userName){
+        this.userName = userName;
 
 //        LocalDB db = Room.inMemoryDatabaseBuilder(
 //                        InstrumentationRegistry.getContext(),
@@ -38,9 +37,22 @@ public class UserRepository {
 //        contactDao = db.contactDao();
 
         LocalDB db = LocalDB.getDatabase(ChatListActivity.getInstance());
-        this.contactDao = db.contactDao();
+        this.userDao = db.userDao();
         this.contactListData = new ContactListData();
-        this.api = ContactAPI.getInstance();
+        this.api = UserAPI.getInstance();
+    }
+
+
+    public List<Contact> join() {
+        List<Contact> contactList = new ArrayList<>();
+        List<ContactsOfUser> contacts = userDao.getContactsOfUser();
+        for (ContactsOfUser contactsOfUser : contacts) {
+            if (contactsOfUser.user.getUserName().equals(userName)) {
+                contactList = contactsOfUser.contacts;
+                return contactList;
+            }
+        }
+        return contactList;
     }
 
 
@@ -49,9 +61,12 @@ public class UserRepository {
 
         public ContactListData(){
             super();
-            List<Contact> contacts = contactDao.index();
-            // every time we will do set it will call all the observers
+            List<Contact> contacts = join();
             setValue(contacts);
+
+
+
+            // every time we will do set it will call all the observers
         }
 
 //        @Override

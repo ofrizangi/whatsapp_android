@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.whatsappandriodclient.entities.Contact;
-import com.example.whatsappandriodclient.entities.ContactToAdd;
 import com.example.whatsappandriodclient.repositories.UserRepository;
 
 import java.util.List;
@@ -17,9 +16,12 @@ public class UserViewModel extends ViewModel {
 
     private LiveData<List<Contact>> contactList;
 
+    private String userName;
 
-    public UserViewModel(){
-        this.cRepository = new UserRepository();
+
+    public UserViewModel(String userName){
+        this.userName = userName;
+        this.cRepository = new UserRepository(userName);
         this.contactList = cRepository.getAll();
     }
 
