@@ -11,7 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.whatsappandriodclient.api.UserAPI;
 import com.example.whatsappandriodclient.databinding.ActivityRegisterBinding;
-import com.example.whatsappandriodclient.entities.User;
+//import com.example.whatsappandriodclient.entities.User;
+import com.example.whatsappandriodclient.entities.UserRegister;
 
 import java.util.ArrayList;
 
@@ -61,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                     String image = "";
 
                     if(checkPassAndUser(password, confirm, userName)) {
-                        User user = new User(userName, nickName, password, image, new ArrayList<>());
+                        UserRegister user = new UserRegister(userName, nickName, password, image, new ArrayList<>());
                         addUser(user);
                     }
                 }
@@ -121,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-    public void addUser(User user) {
+    public void addUser(UserRegister user) {
         Call<String> call = UserAPI.getInstance().getMyApi().createUser(user);
         call.enqueue(new Callback<String>() {
             @Override

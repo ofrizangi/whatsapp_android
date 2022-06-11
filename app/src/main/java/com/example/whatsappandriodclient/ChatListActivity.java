@@ -7,13 +7,12 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.room.Room;
 
 import com.example.whatsappandriodclient.adapters.ContactListAdapter;
-import com.example.whatsappandriodclient.dao.ContactDao;
+//import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.databinding.ActivityChatListBinding;
 import com.example.whatsappandriodclient.entities.Contact;
-import com.example.whatsappandriodclient.viewmodels.ContactsViewModel;
+import com.example.whatsappandriodclient.viewmodels.UserViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.List;
 public class ChatListActivity extends AppCompatActivity implements ContactListAdapter.OnContactListener {
 
     private ActivityChatListBinding binding;
-    private ContactsViewModel viewModel;
+    private UserViewModel viewModel;
 
 
     private static ChatListActivity sInstance;
@@ -32,7 +31,6 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
     }
 
     private LocalDB db;
-    private ContactDao contactDao;
     private List<Contact> contacts;
 
     @Override
@@ -48,16 +46,17 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
             Log.i("chat", intent.getStringExtra("userName"));
         }
 
-        viewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
+        viewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        db = Room.databaseBuilder(getApplicationContext(), LocalDB.class, "ContactDB")
-                .allowMainThreadQueries()
-                .build();
-
-        contactDao = db.contactDao();
+//        db = Room.databaseBuilder(getApplicationContext(), LocalDB.class, "ContactDB")
+//                .allowMainThreadQueries()
+//                .build();
+//
+//        contactDao = db.contactDao();
 
         binding.addcontact.setOnClickListener(v -> {
                     Intent myIntent = new Intent(getApplicationContext(), AddContactActivity.class);
+                    myIntent.putExtra("userName", intent.getStringExtra("userName"));
                     myIntent.putExtra("token", intent.getStringExtra("token"));
 
                     startActivity(myIntent);

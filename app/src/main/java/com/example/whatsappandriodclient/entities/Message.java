@@ -8,20 +8,30 @@ import com.google.gson.annotations.SerializedName;
 @Entity
 public class Message {
     @PrimaryKey(autoGenerate = true)
-    @SerializedName("id")
+    //@SerializedName("id")
     private int id;
-    @SerializedName("content")
+
+    public int getContactID() {
+        return contactID;
+    }
+
+    public void setContactID(int contactID) {
+        this.contactID = contactID;
+    }
+
+    private int contactID;
+    //@SerializedName("content")
     private String content;
-    @SerializedName("time")
+    //@SerializedName("time")
     private String time;
-    @SerializedName("sent")
+    //@SerializedName("sent")
     private boolean sent;
 
-    public Message(int id, String content, String time, boolean sent) {
+    public Message(String content, String time, boolean sent, int contactID) {
         this.time = time;
-        this.id = id;
         this.content = content;
         this.sent = sent;
+        this.contactID = contactID;
     }
 
 
