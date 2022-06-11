@@ -18,7 +18,6 @@ import com.example.whatsappandriodclient.entities.ContactsOfUser;
 import com.example.whatsappandriodclient.entities.MessagesOfContact;
 import com.example.whatsappandriodclient.entities.User;
 import com.example.whatsappandriodclient.viewmodels.ContactViewModel;
-import com.example.whatsappandriodclient.viewmodels.UserViewModel;
 
 import java.util.List;
 
@@ -63,15 +62,15 @@ public class AddContactActivity extends AppCompatActivity {
             User user = new User(binding.nickname.getText().toString(),"ofri","123", "img");
             userDao.insert(user);
 
-//            Contact c = new Contact(binding.username.getText().toString(), "sss", "local", "ofri");
+//            Contact c = new Contact(binding.username.getText().toString(), "sss", "local", "Ofri");
 //            contactDao.insert(c);
+//            Contact c2 = new Contact(binding.username.getText().toString(), "sss", "local", "ofri");
+//            contactDao.insert(c2);
 
 //            int id = c.getId();
 
 //            Message m = new Message("A","A",true,id);
 //            messageDao.insert(m);
-
-
             List<ContactsOfUser> contact = userDao.getContactsOfUser();
             List<Contact> contacts1 = contactDao.index();
 

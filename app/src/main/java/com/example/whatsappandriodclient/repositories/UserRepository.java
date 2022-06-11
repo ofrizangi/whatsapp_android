@@ -16,6 +16,7 @@ import java.util.List;
 public class UserRepository {
 
     private UserDao userDao;
+//    private ContactDao contactDao;
     private ContactListData contactListData;
     private UserAPI api;
     private String userName;
@@ -38,6 +39,7 @@ public class UserRepository {
 
         LocalDB db = LocalDB.getDatabase(ChatListActivity.getInstance());
         this.userDao = db.userDao();
+//        this.contactDao = db.contactDao();
         this.contactListData = new ContactListData();
         this.api = UserAPI.getInstance();
     }
@@ -63,9 +65,6 @@ public class UserRepository {
             super();
             List<Contact> contacts = join();
             setValue(contacts);
-
-
-
             // every time we will do set it will call all the observers
         }
 
@@ -83,6 +82,9 @@ public class UserRepository {
     public LiveData<List<Contact>> getAll(){
         return this.contactListData;
     }
+
+
+
 
 //    public void addContact(final ContactToAdd contact, final String token, String userID){
 //        this.api.addContact(contact, token);

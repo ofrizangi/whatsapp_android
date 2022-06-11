@@ -1,10 +1,18 @@
 package com.example.whatsappandriodclient.api;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.util.Log;
 
-//import com.example.whatsappandriodclient.entities.User;
+import com.example.whatsappandriodclient.ChatListActivity;
+import com.example.whatsappandriodclient.LoginActivity;
+import com.example.whatsappandriodclient.RegisterActivity;
+import com.example.whatsappandriodclient.dao.UserDao;
+import com.example.whatsappandriodclient.entities.User;
+import com.example.whatsappandriodclient.entities.UserLogin;
 import com.example.whatsappandriodclient.entities.UserRegister;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -41,7 +49,7 @@ public class UserAPI {
     }
 
 
-    public void get() {
+    public void get(UserDao userDao) {
 
         Call<List<UserRegister>> call = webServiceAPI.getUser();
         call.enqueue(new Callback<List<UserRegister>>() {
@@ -49,7 +57,14 @@ public class UserAPI {
             public void onResponse(Call<List<UserRegister>> call, Response<List<UserRegister>> response) {
                 Log.i("in response", "succeed");
 
-                List<UserRegister> post = response.body();
+                List<UserRegister> users = response.body();
+                List<User> users1 = new ArrayList<>();
+                for(UserRegister user: users){
+                    users1.add(new User(user.getUserName(), user.getNickName(), user.getPassword(), user.getImage()));
+                }
+                userDao.insertMany(users1);
+//                List<User> my = userDao.index();
+//                Log.i("blah", "blah");
             }
 
             @Override
@@ -58,6 +73,68 @@ public class UserAPI {
 
             }
         });
+    }
+
+
+    public void addUser(UserRegister user) {
+        Call<String> call = UserAPI.getInstance().getMyApi().createUser(user);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    String token = response.body();
+                    if(token.compareTo("false") == 0){
+                        AlertDialog.Builder alert = new AlertDialog.Builder(RegisterActivity.getInstance());
+                        alert.setTitle("error");
+                        alert.setMessage("user name already exist");
+                        alert.create().show();
+                    }
+                    else{
+                        Intent intent = new Intent(RegisterActivity.getInstance(), ChatListActivity.class);
+                        intent.putExtra("userName", user.getUserName());
+                        intent.putExtra("token", token);
+                        RegisterActivity.getInstance().startActivity(intent);
+                    }
+
+                    Log.i("in response", "token");
+                }
+
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.i("in fail", "fail");
+            }
+        });
+
+    }
+
+
+    public void sendUser(UserLogin user) {
+        Call<String> call = UserAPI.getInstance().getMyApi().sendUser(user);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String token = response.body();
+                if(token.compareTo("false") == 0){
+                    AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.getInstance());
+                    alert.setTitle("error");
+                    alert.setMessage("user name or password are incorrect");
+                    alert.create().show();
+                }
+                else{
+                    Intent intent = new Intent(LoginActivity.getInstance(), ChatListActivity.class);
+                    intent.putExtra("userName", user.getUserName());
+                    intent.putExtra("token", token);
+                    LoginActivity.getInstance().startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.i("in fail", "fail");
+            }
+        });
+
     }
 
 }

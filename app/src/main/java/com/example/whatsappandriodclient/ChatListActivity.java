@@ -49,14 +49,9 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
 
         viewModel = new ViewModelProvider(this, new UserViewModelFactory(intent.getStringExtra("userName"))).get(UserViewModel.class);
 
-//        db = Room.databaseBuilder(getApplicationContext(), LocalDB.class, "ContactDB")
-//                .allowMainThreadQueries()
-//                .build();
-//
-//        contactDao = db.contactDao();
 
         binding.addcontact.setOnClickListener(v -> {
-                    Intent myIntent = new Intent(getApplicationContext(), AddContactActivity.class);
+            Intent myIntent = new Intent(getApplicationContext(), AddContactActivity.class);
                     myIntent.putExtra("userName", intent.getStringExtra("userName"));
                     myIntent.putExtra("token", intent.getStringExtra("token"));
 
@@ -79,13 +74,6 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
                     adapter.setContacts(contacts);
                 }
         );
-
-
-//        LocalDB db = Room.databaseBuilder(getApplicationContext(), LocalDB.class,  "contact").
-//                allowMainThreadQueries().build();
-//        ContactDao contactDao = db.contactDao();
-
-
 
 
 

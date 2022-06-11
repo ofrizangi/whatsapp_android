@@ -8,24 +8,24 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
-import com.example.whatsappandriodclient.api.UserAPI;
 import com.example.whatsappandriodclient.databinding.ActivityRegisterBinding;
-//import com.example.whatsappandriodclient.entities.User;
 import com.example.whatsappandriodclient.entities.UserRegister;
+import com.example.whatsappandriodclient.viewmodels.AppViewModel;
 
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private ActivityRegisterBinding binding;
     private static final int IMAGE_PICK_CODE =1000;
-    private String userName = "";
+    private AppViewModel viewModel;
+    private static RegisterActivity sInstance;
 
+    public static RegisterActivity getInstance(){
+        return sInstance;
+    }
 
     // this is not working - need to find the right source
     private Uri image = Uri.parse("android.resource://com.example.whatsappandriodclient/drawable/avatar.png");
@@ -34,8 +34,9 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
-
         setContentView(binding.getRoot());
+        sInstance = this;
+        viewModel = new ViewModelProvider(this).get(AppViewModel.class);
 
         binding.link.setOnClickListener(v ->{
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -55,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         binding.register.setOnClickListener(v ->{
-                    this.userName = binding.username.getText().toString();
+                    String userName = binding.username.getText().toString();
                     String nickName = binding.nickname.getText().toString();
                     String password = binding.password.getText().toString();
                     String confirm = binding.confirm.getText().toString();
@@ -63,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     if(checkPassAndUser(password, confirm, userName)) {
                         UserRegister user = new UserRegister(userName, nickName, password, image, new ArrayList<>());
-                        addUser(user);
+                        viewModel.addUser(user);
                     }
                 }
         );
@@ -122,40 +123,40 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-    public void addUser(UserRegister user) {
-        Call<String> call = UserAPI.getInstance().getMyApi().createUser(user);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if(response.isSuccessful()){
-                    String token = response.body();
-                    if(token.compareTo("false") == 0){
-                            AlertDialog.Builder alert = new AlertDialog.Builder(RegisterActivity.this);
-                            alert.setTitle("error");
-                            alert.setMessage("user name already exist");
-                            alert.create().show();
-                        }
-                        else{
-                            Intent intent = new Intent(getApplicationContext(), ChatListActivity.class);
-                            intent.putExtra("userName", userName);
-                            intent.putExtra("token", token);
-//                            intent.putExtra("image", image);
-                            userName = "";
-//                            image = null;
-                            startActivity(intent);
-                        }
-
-                    Log.i("in response", "token");
-                }
-
-            }
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.i("in fail", "fail");
-            }
-        });
-
-    }
+//    public void addUser(UserRegister user) {
+//        Call<String> call = UserAPI.getInstance().getMyApi().createUser(user);
+//        call.enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//                if(response.isSuccessful()){
+//                    String token = response.body();
+//                    if(token.compareTo("false") == 0){
+//                            AlertDialog.Builder alert = new AlertDialog.Builder(RegisterActivity.this);
+//                            alert.setTitle("error");
+//                            alert.setMessage("user name already exist");
+//                            alert.create().show();
+//                        }
+//                        else{
+//                            Intent intent = new Intent(getApplicationContext(), ChatListActivity.class);
+//                            intent.putExtra("userName", userName);
+//                            intent.putExtra("token", token);
+////                            intent.putExtra("image", image);
+//                            userName = "";
+////                            image = null;
+//                            startActivity(intent);
+//                        }
+//
+//                    Log.i("in response", "token");
+//                }
+//
+//            }
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//                Log.i("in fail", "fail");
+//            }
+//        });
+//
+//    }
 
 
 }
