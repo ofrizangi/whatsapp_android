@@ -5,23 +5,21 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.ContactToAdd;
-import com.example.whatsappandriodclient.repositories.ContactRepository;
+import com.example.whatsappandriodclient.repositories.UserRepository;
 
 import java.util.List;
 
 
 //The view model wont changed the data - this is the job of the repository
-public class ContactsViewModel extends ViewModel {
+public class UserViewModel extends ViewModel {
 
-    private ContactRepository cRepository;
+    private UserRepository cRepository;
 
     private LiveData<List<Contact>> contactList;
 
 
-
-
-    public ContactsViewModel(){
-        this.cRepository = new ContactRepository();
+    public UserViewModel(){
+        this.cRepository = new UserRepository();
         this.contactList = cRepository.getAll();
     }
 
@@ -29,15 +27,8 @@ public class ContactsViewModel extends ViewModel {
         return contactList;
     }
 
-
     public Contact getAContact(int position){
         return contactList.getValue().get(position);
     }
-
-
-    public void addContact(String token , ContactToAdd contact){
-        this.cRepository.addContact(contact,  token);
-    }
-
 
 }

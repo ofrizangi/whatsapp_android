@@ -9,18 +9,23 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 
 import com.example.whatsappandriodclient.dao.ContactDao;
+import com.example.whatsappandriodclient.dao.MessageDao;
+import com.example.whatsappandriodclient.dao.UserDao;
 import com.example.whatsappandriodclient.databinding.ActivityAddContactBinding;
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.ContactToAdd;
-import com.example.whatsappandriodclient.viewmodels.ContactsViewModel;
+import com.example.whatsappandriodclient.entities.ContactsOfUser;
+import com.example.whatsappandriodclient.entities.MessagesOfContact;
+import com.example.whatsappandriodclient.entities.User;
+import com.example.whatsappandriodclient.viewmodels.ContactViewModel;
+import com.example.whatsappandriodclient.viewmodels.UserViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddContactActivity extends AppCompatActivity {
 
     private ActivityAddContactBinding binding;
-    private ContactsViewModel viewModel;
+    private ContactViewModel viewModel;
 
     private static AddContactActivity sInstance;
 
@@ -37,7 +42,7 @@ public class AddContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         sInstance = this;
         binding = ActivityAddContactBinding.inflate(getLayoutInflater());
-        viewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ContactViewModel.class);
 
         setContentView(binding.getRoot());
 
@@ -45,22 +50,38 @@ public class AddContactActivity extends AppCompatActivity {
         String token = intent.getStringExtra("token");
         Log.i("chat", intent.getStringExtra("token"));
 
-        db = Room.databaseBuilder(getApplicationContext(), LocalDB.class, "ContactDB")
+        db = Room.databaseBuilder(getApplicationContext(), LocalDB.class, "five")
                 .allowMainThreadQueries()
                 .build();
         contactDao = db.contactDao();
+        MessageDao  messageDao= db.messageDao();
+        UserDao userDao = db.userDao();
 
 
         binding.addcontact.setOnClickListener(v -> {
 
-            Contact c = new Contact("sivan", "sss", "local");
+            User user = new User(binding.nickname.getText().toString(),"ofri","123", "img");
+            userDao.insert(user);
 
-            contactDao.insert(c);
+//            Contact c = new Contact(binding.username.getText().toString(), "sss", "local", "ofri");
+//            contactDao.insert(c);
+
+//            int id = c.getId();
+
+//            Message m = new Message("A","A",true,id);
+//            messageDao.insert(m);
+
+
+            List<ContactsOfUser> contact = userDao.getContactsOfUser();
+            List<Contact> contacts1 = contactDao.index();
+
+            List<MessagesOfContact> messages = contactDao.getMessagesOfContact();
+
             finish();
             String nickName = binding.nickname.getText().toString();
             String username = binding.username.getText().toString();
             String server = binding.server.getText().toString();
-            viewModel.addContact(token, new ContactToAdd(username, nickName, server));
+            viewModel.addContact(token, new ContactToAdd(username, nickName, server), intent.getStringExtra("userName"));
 
         });
 

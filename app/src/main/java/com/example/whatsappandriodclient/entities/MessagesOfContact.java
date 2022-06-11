@@ -11,7 +11,7 @@ public class MessagesOfContact {
     public Contact contact;
     @Relation(
             parentColumn = "id",
-            entityColumn = "id"
+            entityColumn = "contactID"
     )
     public List<Message> messages;
 

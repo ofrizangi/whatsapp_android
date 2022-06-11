@@ -2,7 +2,8 @@ package com.example.whatsappandriodclient.api;
 
 import android.util.Log;
 
-import com.example.whatsappandriodclient.entities.User;
+//import com.example.whatsappandriodclient.entities.User;
+import com.example.whatsappandriodclient.entities.UserRegister;
 
 import java.util.List;
 
@@ -42,17 +43,17 @@ public class UserAPI {
 
     public void get() {
 
-        Call<List<User>> call = webServiceAPI.getUser();
-        call.enqueue(new Callback<List<User>>() {
+        Call<List<UserRegister>> call = webServiceAPI.getUser();
+        call.enqueue(new Callback<List<UserRegister>>() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+            public void onResponse(Call<List<UserRegister>> call, Response<List<UserRegister>> response) {
                 Log.i("in response", "succeed");
 
-                List<User> post = response.body();
+                List<UserRegister> post = response.body();
             }
 
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
+            public void onFailure(Call<List<UserRegister>> call, Throwable t) {
                 Log.i("in fail", "fail");
 
             }

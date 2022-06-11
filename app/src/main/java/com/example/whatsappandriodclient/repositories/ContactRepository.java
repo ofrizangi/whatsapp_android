@@ -3,79 +3,48 @@ package com.example.whatsappandriodclient.repositories;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.whatsappandriodclient.ChatListActivity;
+import com.example.whatsappandriodclient.LocalDB;
 import com.example.whatsappandriodclient.api.ContactAPI;
 import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.ContactToAdd;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class ContactRepository {
 
     private ContactDao contactDao;
-    private ContactListData contactListData;
+//    private UserRepository.ContactListData contactListData;
     private ContactAPI api;
 
 
     public ContactRepository(){
 
-//        LocalDB db = Room.inMemoryDatabaseBuilder(
-//                        InstrumentationRegistry.getContext(),
-//                        LocalDB.class)
-//                .build();
-//        LocalDB db = Room.databaseBuilder(getApplicationContext(), LocalDB.class,  "contact").
-//                allowMainThreadQueries().build();
-
-//        LocalDB db = LocalDB.getDatabase(ChatListActivity.class);
-//        this.contactDao = db.contactDao();
-        this.contactListData = new ContactListData();
+        LocalDB db = LocalDB.getDatabase(ChatListActivity.getInstance());
+        this.contactDao = db.contactDao();
         this.api = ContactAPI.getInstance();
     }
 
 
 
     class ContactListData extends MutableLiveData<List<Contact>> {
-
         public ContactListData(){
             super();
-            List<Contact> contacts = new LinkedList<>();
-
-            // if we work with room instead of all this we can do go to the db in the onActive function
-            contacts.add(new Contact("ofri", "ofri", "localhost" ));
-            contacts.add(new Contact("sivan", "sivan", "localhost" ));
-            contacts.add(new Contact("dcs", "ds", "localhost" ));
-            contacts.add(new Contact("ofri", "ofri", "localhost" ));
-            contacts.add(new Contact("sivan", "sivan", "localhost" ));
-            contacts.add(new Contact("dcs", "ds", "localhost" ));
-            contacts.add(new Contact("ofri", "ofri", "localhost" ));
-            contacts.add(new Contact("sivan", "sivan", "localhost" ));
-            contacts.add(new Contact("dcs", "ds", "localhost" ));
-
+            List<Contact> contacts = contactDao.index();
             // every time we will do set it will call all the observers
             setValue(contacts);
         }
-
-//        @Override
-//        protected void onActive(){
-//            super.onActive();
-//
-//            new Thread(() -> {
-//                contactListData.postValue(contactDao.get());
-//            }).start();
-//        }
-
     }
 
-    public LiveData<List<Contact>> getAll(){
-        return this.contactListData;
-    }
+//    public LiveData<List<Contact>> getAll(){
+//        return this.contactListData;
+//    }
 
-    public void addContact(final ContactToAdd contact, final String token){
+    public void addContact(final ContactToAdd contact, final String token, String userID){
         this.api.addContact(contact, token);
+        Contact contact1 = new Contact(contact.getContactName(), contact.getContactNickName(), contact.getServer(), userID);
+        this.contactDao.insert(contact1);
+
     }
-
-
-
-
 }

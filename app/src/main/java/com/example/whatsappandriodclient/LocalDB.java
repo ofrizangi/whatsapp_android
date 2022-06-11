@@ -3,19 +3,30 @@ package com.example.whatsappandriodclient;
 
 import android.content.Context;
 
+import androidx.room.AutoMigration;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.whatsappandriodclient.dao.ContactDao;
+import com.example.whatsappandriodclient.dao.MessageDao;
+import com.example.whatsappandriodclient.dao.UserDao;
 import com.example.whatsappandriodclient.entities.Contact;
+import com.example.whatsappandriodclient.entities.Message;
+import com.example.whatsappandriodclient.entities.User;
+//import com.example.whatsappandriodclient.entities.MessagesOfContact;
 
-@Database(entities = {Contact.class}, version = 2)
-//@Database(entities = {Contact.class, Message.class}, version = 2, exportSchema = false)
+//@Database(entities = {Message.class}, version = 2, exportSchema = false)
+//@Database(version = 3, entities = {Message.class} , autoMigrations = {
+//        @AutoMigration(from = 2, to = 3)}, exportSchema = false)
+
+@Database(entities = {Contact.class, Message.class, User.class}, version = 1, exportSchema = false)
 
 public abstract class LocalDB extends RoomDatabase {
 
     public abstract ContactDao contactDao();
+    public abstract MessageDao messageDao();
+    public abstract UserDao userDao();
 
     private static volatile LocalDB INSTANCE;
 
@@ -23,8 +34,9 @@ public abstract class LocalDB extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (LocalDB.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    LocalDB.class, "whatsapp_database")
+                    INSTANCE = Room.databaseBuilder(context,
+                                    LocalDB.class, "five")
+                            .allowMainThreadQueries()
                             .build();
                 }
             }

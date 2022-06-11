@@ -1,19 +1,11 @@
 package com.example.whatsappandriodclient.entities;
 
-
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
-//import
-@Entity
-public class User {
-    @NonNull
-    @PrimaryKey
+
+public class UserRegister {
     @SerializedName("userName")
     @Expose
     private String userName;
@@ -26,13 +18,16 @@ public class User {
     @SerializedName("image")
     @Expose
     private String image;
+    @SerializedName("contacts")
+    @Expose
+    private List<Contact> contacts;
 
-
-    public User(@NonNull String userName,  String nickName, String password, String image) {
+    public UserRegister(String userName, String nickName, String password, String image, List<Contact> contacts) {
         this.userName = userName;
         this.nickName = nickName;
         this.password = password;
         this.image = image;
+        this.contacts = contacts;
     }
 
 
@@ -40,8 +35,7 @@ public class User {
         return userName;
     }
 
-
-    public void setUserName(@NonNull  String userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
@@ -69,6 +63,11 @@ public class User {
         this.image = image;
     }
 
+    public List<Contact> getContacts() {
+        return contacts;
+    }
 
-
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
+    }
 }

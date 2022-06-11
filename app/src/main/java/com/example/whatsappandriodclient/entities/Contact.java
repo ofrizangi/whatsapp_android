@@ -3,7 +3,7 @@ package com.example.whatsappandriodclient.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "contact")
 public class Contact {
     @PrimaryKey(autoGenerate = true)
 //    @SerializedName("id")
@@ -18,11 +18,22 @@ public class Contact {
 //    @SerializedName("server")
 //    @ColumnInfo(name= "server")
     private String server;
+    private String userID;
 
-    public Contact( String contactUserName, String contactNickName, String server) {
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+
+    public Contact( String contactUserName, String contactNickName, String server, String userID) {
         this.contactUserName = contactUserName;
         this.contactNickName = contactNickName;
         this.server = server;
+        this.userID = userID;
     }
 
     public int getId() {
