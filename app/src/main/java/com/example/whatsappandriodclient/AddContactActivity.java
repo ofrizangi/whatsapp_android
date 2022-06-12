@@ -13,7 +13,7 @@ import com.example.whatsappandriodclient.dao.MessageDao;
 import com.example.whatsappandriodclient.dao.UserDao;
 import com.example.whatsappandriodclient.databinding.ActivityAddContactBinding;
 import com.example.whatsappandriodclient.entities.Contact;
-import com.example.whatsappandriodclient.entities.ContactToAdd;
+import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
 import com.example.whatsappandriodclient.entities.ContactsOfUser;
 import com.example.whatsappandriodclient.entities.MessagesOfContact;
 import com.example.whatsappandriodclient.entities.User;
@@ -49,7 +49,7 @@ public class AddContactActivity extends AppCompatActivity {
         String token = intent.getStringExtra("token");
         Log.i("chat", intent.getStringExtra("token"));
 
-        db = Room.databaseBuilder(getApplicationContext(), LocalDB.class, "five")
+        db = Room.databaseBuilder(getApplicationContext(), LocalDB.class, "seven")
                 .allowMainThreadQueries()
                 .build();
         contactDao = db.contactDao();

@@ -88,8 +88,7 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
 //        List<Contact> con = contactDao.index();
 //        Log.i("room" , contactDao.index().toString());
 
-
-
+        viewModel.getAllContacts(intent.getStringExtra("token"));
     }
 
     @Override

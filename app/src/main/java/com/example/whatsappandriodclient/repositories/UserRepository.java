@@ -6,9 +6,11 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.whatsappandriodclient.ChatListActivity;
 import com.example.whatsappandriodclient.LocalDB;
 import com.example.whatsappandriodclient.api.UserAPI;
+import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.dao.UserDao;
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.ContactsOfUser;
+import com.example.whatsappandriodclient.objectAPI.ContactGet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +18,12 @@ import java.util.List;
 public class UserRepository {
 
     private UserDao userDao;
+    private ContactDao contactDao;
 //    private ContactDao contactDao;
     private ContactListData contactListData;
     private UserAPI api;
+    private List<Contact> contacts;
     private String userName;
-
 
     public UserRepository(String userName){
         this.userName = userName;
@@ -39,6 +42,7 @@ public class UserRepository {
 
         LocalDB db = LocalDB.getDatabase(ChatListActivity.getInstance());
         this.userDao = db.userDao();
+        this.contactDao = db.contactDao();
 //        this.contactDao = db.contactDao();
         this.contactListData = new ContactListData();
         this.api = UserAPI.getInstance();
@@ -66,6 +70,9 @@ public class UserRepository {
             List<Contact> contacts = join();
             setValue(contacts);
             // every time we will do set it will call all the observers
+
+
+
         }
 
 //        @Override
@@ -79,10 +86,27 @@ public class UserRepository {
 
     }
 
+
+
+    public void insertContactsToDao(List<ContactGet> contactGets){
+        List<Contact> contacts = new ArrayList<>();
+        for(ContactGet contact: contactGets){
+            contacts.add(new Contact(contact.getId(), contact.getName(), contact.getServer(), userName));
+        }
+        List<Contact> contactList = join();
+        contactDao.deleteMany(contactList);
+        contactDao.insertMany(contacts);
+
+        List<Contact> my = contactDao.index();
+    }
+
     public LiveData<List<Contact>> getAll(){
         return this.contactListData;
     }
 
+    public void getAllContacts(String token){
+        api.getAllContacts(token, this);
+    }
 
 
 

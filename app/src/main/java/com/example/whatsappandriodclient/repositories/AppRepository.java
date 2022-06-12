@@ -5,8 +5,8 @@ import com.example.whatsappandriodclient.LoginActivity;
 import com.example.whatsappandriodclient.api.UserAPI;
 import com.example.whatsappandriodclient.dao.UserDao;
 import com.example.whatsappandriodclient.entities.User;
-import com.example.whatsappandriodclient.entities.UserLogin;
-import com.example.whatsappandriodclient.entities.UserRegister;
+import com.example.whatsappandriodclient.objectAPI.UserLogin;
+import com.example.whatsappandriodclient.objectAPI.UserRegister;
 
 public class AppRepository {
     UserDao userDao;

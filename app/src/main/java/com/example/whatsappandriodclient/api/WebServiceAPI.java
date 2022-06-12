@@ -1,9 +1,10 @@
 package com.example.whatsappandriodclient.api;
 
-import com.example.whatsappandriodclient.entities.ContactToAdd;
+import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
 //import com.example.whatsappandriodclient.entities.User;
-import com.example.whatsappandriodclient.entities.UserLogin;
-import com.example.whatsappandriodclient.entities.UserRegister;
+import com.example.whatsappandriodclient.objectAPI.UserLogin;
+import com.example.whatsappandriodclient.objectAPI.UserRegister;
+import com.example.whatsappandriodclient.objectAPI.ContactGet;
 
 import java.util.List;
 
@@ -27,6 +28,8 @@ public interface WebServiceAPI {
      @POST("contacts")
      Call<Void> addContact(@Header("authorization") String token, @Body ContactToAdd contactToAdd);
 
+     @GET("contacts")
+     Call<List<ContactGet>> getAllContacts(@Header("authorization") String token);
 
 
  }

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.whatsappandriodclient.databinding.ActivityLoginBinding;
-import com.example.whatsappandriodclient.entities.UserLogin;
+import com.example.whatsappandriodclient.objectAPI.UserLogin;
 import com.example.whatsappandriodclient.viewmodels.AppViewModel;
 
 public class LoginActivity extends AppCompatActivity {
