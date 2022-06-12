@@ -38,7 +38,7 @@ public class UserViewModel extends ViewModel {
 
     }
 
-
+//    public int getSpecificContactId(int position)
 
 
 }

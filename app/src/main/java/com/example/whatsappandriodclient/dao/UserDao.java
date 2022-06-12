@@ -34,6 +34,7 @@ public interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
         //get list of contact
     void insertMany(List<User> user);
+
     @Update
     void update(User... user);
 

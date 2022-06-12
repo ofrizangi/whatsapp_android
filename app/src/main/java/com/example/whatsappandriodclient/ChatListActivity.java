@@ -105,10 +105,16 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
 
     @Override
     public void onContactClick(int position) {
+        Intent myIntent = getIntent();
         Contact contact = viewModel.getAContact(position);
         Intent intent = new Intent(this, ChatActivity.class);
-        intent.putExtra("contactName" , contact.getContactNickName());
+        intent.putExtra("contactNickName" , contact.getContactNickName());
+        intent.putExtra("contactUserName" , contact.getContactUserName());
+        intent.putExtra("contactId" , contact.getId());
+        intent.putExtra("token" , myIntent.getStringExtra("token"));
         startActivity(intent);
-
     }
+
+
+
 }

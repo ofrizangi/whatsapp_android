@@ -1,8 +1,8 @@
-package com.example.whatsappandriodclient.entities;
+package com.example.whatsappandriodclient.objectAPI;
 
 public class SendMessage {
 
-    String content;
+    private String content;
 
     public SendMessage(String content) {
         this.content = content;
