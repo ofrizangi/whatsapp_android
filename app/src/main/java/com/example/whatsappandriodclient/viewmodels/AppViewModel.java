@@ -2,8 +2,8 @@ package com.example.whatsappandriodclient.viewmodels;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.whatsappandriodclient.entities.UserLogin;
-import com.example.whatsappandriodclient.entities.UserRegister;
+import com.example.whatsappandriodclient.objectAPI.UserLogin;
+import com.example.whatsappandriodclient.objectAPI.UserRegister;
 import com.example.whatsappandriodclient.repositories.AppRepository;
 
 

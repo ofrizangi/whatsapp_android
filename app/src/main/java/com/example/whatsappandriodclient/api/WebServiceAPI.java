@@ -2,7 +2,6 @@ package com.example.whatsappandriodclient.api;
 
 import com.example.whatsappandriodclient.entities.ContactToAdd;
 //import com.example.whatsappandriodclient.entities.User;
-import com.example.whatsappandriodclient.entities.SendMessage;
 import com.example.whatsappandriodclient.entities.UserLogin;
 import com.example.whatsappandriodclient.entities.UserRegister;
 
@@ -17,23 +16,25 @@ import retrofit2.http.Path;
 
 public interface WebServiceAPI {
 
-    @GET("user/get")
-    Call<List<UserRegister>> getUser();
+     @GET("user/get")
+     Call<List<UserRegister>> getUser();
 
-    @POST("user/register")
-    Call<String> createUser(@Body UserRegister user);
+     @POST("user/register")
+     Call<String> createUser(@Body UserRegister user);
 
-    @POST("user/login")
-    Call<String> sendUser(@Body UserLogin userLogin);
+     @POST("user/login")
+     Call<String> sendUser(@Body UserLogin userLogin);
 
-    @POST("contacts")
-    Call<Void> addContact(@Header("authorization") String token, @Body ContactToAdd contactToAdd);
+     @POST("contacts")
+     Call<Void> addContact(@Header("authorization") String token, @Body ContactToAdd contactToAdd);
 
+     @GET("contacts")
+     Call<List<ContactGet>> getAllContacts(@Header("authorization") String token);
 
     @POST("contacts/{id}/messages")
     Call<Void> sendMessage(@Header("authorization") String token, @Path(value = "id") String contactUserName, @Body SendMessage message);
 
 
-}
+ }
 
 

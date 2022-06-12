@@ -12,7 +12,7 @@ import java.util.List;
 //The view model wont changed the data - this is the job of the repository
 public class UserViewModel extends ViewModel {
 
-    private UserRepository cRepository;
+    private UserRepository userRepository;
 
     private LiveData<List<Contact>> contactList;
 
@@ -21,8 +21,8 @@ public class UserViewModel extends ViewModel {
 
     public UserViewModel(String userName){
         this.userName = userName;
-        this.cRepository = new UserRepository(userName);
-        this.contactList = cRepository.getAll();
+        this.userRepository = new UserRepository(userName);
+        this.contactList = userRepository.getAll();
     }
 
     public LiveData<List<Contact>> get(){
@@ -33,6 +33,9 @@ public class UserViewModel extends ViewModel {
         return contactList.getValue().get(position);
     }
 
+    public void getAllContacts(String token){
+        this.userRepository.getAllContacts(token);
+    }
 
 
 

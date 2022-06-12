@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.whatsappandriodclient.databinding.ActivityRegisterBinding;
-import com.example.whatsappandriodclient.entities.UserRegister;
+import com.example.whatsappandriodclient.objectAPI.UserRegister;
 import com.example.whatsappandriodclient.viewmodels.AppViewModel;
 
 import java.util.ArrayList;

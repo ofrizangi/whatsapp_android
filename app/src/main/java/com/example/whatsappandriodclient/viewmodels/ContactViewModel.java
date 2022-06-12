@@ -1,14 +1,9 @@
 package com.example.whatsappandriodclient.viewmodels;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.whatsappandriodclient.entities.Contact;
-import com.example.whatsappandriodclient.entities.ContactToAdd;
+import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
 import com.example.whatsappandriodclient.repositories.ContactRepository;
-import com.example.whatsappandriodclient.repositories.UserRepository;
-
-import java.util.List;
 
 public class ContactViewModel extends ViewModel {
 

@@ -9,8 +9,10 @@ import com.example.whatsappandriodclient.LoginActivity;
 import com.example.whatsappandriodclient.RegisterActivity;
 import com.example.whatsappandriodclient.dao.UserDao;
 import com.example.whatsappandriodclient.entities.User;
-import com.example.whatsappandriodclient.entities.UserLogin;
-import com.example.whatsappandriodclient.entities.UserRegister;
+import com.example.whatsappandriodclient.objectAPI.UserLogin;
+import com.example.whatsappandriodclient.objectAPI.UserRegister;
+import com.example.whatsappandriodclient.objectAPI.ContactGet;
+import com.example.whatsappandriodclient.repositories.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +52,6 @@ public class UserAPI {
 
 
     public void get(UserDao userDao) {
-
         Call<List<UserRegister>> call = webServiceAPI.getUser();
         call.enqueue(new Callback<List<UserRegister>>() {
             @Override
@@ -66,13 +67,45 @@ public class UserAPI {
 //                List<User> my = userDao.index();
 //                Log.i("blah", "blah");
             }
-
             @Override
             public void onFailure(Call<List<UserRegister>> call, Throwable t) {
                 Log.i("in fail", "fail");
-
             }
         });
+    }
+
+
+    public void getAllContacts(String token, UserRepository userRepository) {
+        Call<List<ContactGet>> call = webServiceAPI.getAllContacts("Bearer " + token);
+        call.enqueue(new Callback<List<ContactGet>>() {
+            @Override
+            public void onResponse(Call<List<ContactGet>> call, Response<List<ContactGet>> response) {
+                if(response.isSuccessful()) {
+
+                    List<ContactGet> contactGets = response.body();
+
+
+                    userRepository.insertContactsToDao(contactGets);
+//                    contactDao.insertAllContacts(contacts);
+//                    List<Contact> my = contactDao.index();
+
+                }
+                else{
+                    AlertDialog.Builder alert = new AlertDialog.Builder(ChatListActivity.getInstance());
+                    alert.setTitle("error");
+                    alert.setMessage("something went wrong");
+                    alert.create().show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ContactGet>> call, Throwable t) {
+                Log.i("in fail", "fail");
+            }
+        });
+
+
+
     }
 
 

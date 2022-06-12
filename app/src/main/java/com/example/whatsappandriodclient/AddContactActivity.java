@@ -6,13 +6,14 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Room;
 
 import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.dao.MessageDao;
 import com.example.whatsappandriodclient.dao.UserDao;
 import com.example.whatsappandriodclient.databinding.ActivityAddContactBinding;
 import com.example.whatsappandriodclient.entities.Contact;
-import com.example.whatsappandriodclient.entities.ContactToAdd;
+import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
 import com.example.whatsappandriodclient.entities.ContactsOfUser;
 import com.example.whatsappandriodclient.entities.Message;
 import com.example.whatsappandriodclient.entities.User;

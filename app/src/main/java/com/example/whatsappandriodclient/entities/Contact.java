@@ -1,16 +1,19 @@
 package com.example.whatsappandriodclient.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
+//, primaryKeys = {"contactUserName","userID"}
 @Entity(tableName = "contact")
 public class Contact {
+
     @PrimaryKey(autoGenerate = true)
-//    @SerializedName("id")
-//    @ColumnInfo(name= "id")
-    private int id;
+   //@SerializedName("id")
+    //@ColumnInfo(name= "id")
+      private int id;
 //    @SerializedName("contactUserName")
 //    @ColumnInfo(name= "contactUserName")
+    @NonNull
     private String contactUserName;
 //    @SerializedName("contactNickName")
 //    @ColumnInfo(name= "contactNickName")
@@ -18,18 +21,19 @@ public class Contact {
 //    @SerializedName("server")
 //    @ColumnInfo(name= "server")
     private String server;
+    @NonNull
     private String userID;
 
     public String getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(@NonNull String userID) {
         this.userID = userID;
     }
 
 
-    public Contact( String contactUserName, String contactNickName, String server, String userID) {
+    public Contact( @NonNull String contactUserName, String contactNickName, String server, @NonNull String userID) {
         this.contactUserName = contactUserName;
         this.contactNickName = contactNickName;
         this.server = server;
@@ -53,11 +57,13 @@ public class Contact {
     }
 
 
+
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setContactUserName(String contactUserName) {
+
+    public void setContactUserName(@NonNull String contactUserName) {
         this.contactUserName = contactUserName;
     }
 
@@ -72,7 +78,6 @@ public class Contact {
     @Override
     public String toString() {
         return "Contact{" +
-                "id=" + id +
                 ", contactUserName='" + contactUserName + '\'' +
                 ", contactNickName='" + contactNickName + '\'' +
                 ", server='" + server + '\'' +

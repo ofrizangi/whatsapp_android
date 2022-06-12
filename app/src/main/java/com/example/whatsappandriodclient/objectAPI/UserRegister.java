@@ -1,5 +1,6 @@
-package com.example.whatsappandriodclient.entities;
+package com.example.whatsappandriodclient.objectAPI;
 
+import com.example.whatsappandriodclient.entities.Contact;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

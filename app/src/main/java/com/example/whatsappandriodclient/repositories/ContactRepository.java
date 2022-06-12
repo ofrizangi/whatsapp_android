@@ -5,7 +5,7 @@ import com.example.whatsappandriodclient.LocalDB;
 import com.example.whatsappandriodclient.api.ContactAPI;
 import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.entities.Contact;
-import com.example.whatsappandriodclient.entities.ContactToAdd;
+import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
 
 public class ContactRepository {
 

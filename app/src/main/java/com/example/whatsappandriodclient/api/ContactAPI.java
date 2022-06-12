@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.example.whatsappandriodclient.AddContactActivity;
 import com.example.whatsappandriodclient.ChatListActivity;
-import com.example.whatsappandriodclient.entities.ContactToAdd;
+import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
 
 import retrofit2.Call;
 import retrofit2.Callback;
