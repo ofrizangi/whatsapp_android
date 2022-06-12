@@ -1,10 +1,16 @@
 package com.example.whatsappandriodclient.repositories;
 
+import android.util.Log;
+
 import com.example.whatsappandriodclient.LocalDB;
 import com.example.whatsappandriodclient.LoginActivity;
 import com.example.whatsappandriodclient.api.MessageAPI;
 import com.example.whatsappandriodclient.dao.MessageDao;
-import com.example.whatsappandriodclient.entities.SendMessage;
+import com.example.whatsappandriodclient.entities.Message;
+import com.example.whatsappandriodclient.objectAPI.SendMessage;
+
+import java.util.Date;
+import java.util.List;
 
 public class MessageRepository {
 
@@ -20,10 +26,13 @@ public class MessageRepository {
     }
 
 
-    public void addMessage(final SendMessage message, final String token, final String contactName){
+    public void addMessage(final SendMessage message, final String token, final String contactName, final int contactId){
         this.api.sendMessage(message, token, contactName);
-//        Contact contact1 = new Contact(contact.getContactName(), contact.getContactNickName(), contact.getServer(), userID);
-//        this.contactDao.insert(contact1);
+        Message message1 = new Message(message.getContent(), new Date(), true, contactId);
+        this.messageDao.insert(message1);
+        List<Message> messageList = this.messageDao.index();
+        Log.i("h", "h");
+
     }
 
 

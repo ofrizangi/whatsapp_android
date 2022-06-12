@@ -37,7 +37,7 @@ public class UserViewModel extends ViewModel {
         this.userRepository.getAllContacts(token);
     }
 
-
+//    public int getSpecificContactId(int position)
 
 
 }

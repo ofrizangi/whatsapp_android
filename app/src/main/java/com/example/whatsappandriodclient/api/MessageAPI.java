@@ -3,8 +3,8 @@ package com.example.whatsappandriodclient.api;
 import android.app.AlertDialog;
 import android.util.Log;
 
-import com.example.whatsappandriodclient.AddContactActivity;
-import com.example.whatsappandriodclient.entities.SendMessage;
+import com.example.whatsappandriodclient.ChatActivity;
+import com.example.whatsappandriodclient.objectAPI.SendMessage;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,7 +47,7 @@ public class MessageAPI {
                     Log.i("in send", "succeed");
                 }
                 else{
-                    AlertDialog.Builder alert = new AlertDialog.Builder(AddContactActivity.getInstance());
+                    AlertDialog.Builder alert = new AlertDialog.Builder(ChatActivity.getInstance());
                     alert.setTitle("error");
                     alert.setMessage("something went wrong");
                     alert.create().show();
