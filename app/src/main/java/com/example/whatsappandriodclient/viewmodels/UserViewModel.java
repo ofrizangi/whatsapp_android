@@ -34,7 +34,8 @@ public class UserViewModel extends ViewModel {
     }
 
     public void getAllContacts(String token){
-        this.userRepository.getAllContacts(token);
+         this.userRepository.getAllContacts(token);
+
     }
 
 

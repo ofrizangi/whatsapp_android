@@ -81,9 +81,4 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     public interface OnContactListener {
         void onContactClick(int position);
     }
-
-
-
-
-
 }

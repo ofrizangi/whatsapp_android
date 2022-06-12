@@ -23,7 +23,6 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
     private ActivityChatListBinding binding;
     private UserViewModel viewModel;
 
-
     private static ChatListActivity sInstance;
 
 
@@ -32,11 +31,26 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
     }
 
     private LocalDB db;
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
+        adapter.setContacts(contacts);
+
+
+    }
+
     private List<Contact> contacts;
+    ContactListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        adapter = new ContactListAdapter(this, this);
+
         sInstance = this;
         binding = ActivityChatListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -48,7 +62,8 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
         }
 
         viewModel = new ViewModelProvider(this, new UserViewModelFactory(intent.getStringExtra("userName"))).get(UserViewModel.class);
-
+        viewModel.getAllContacts(intent.getStringExtra("token"));
+//        viewModel.getAllContacts(intent.getStringExtra("token"));
 
         binding.addcontact.setOnClickListener(v -> {
             Intent myIntent = new Intent(getApplicationContext(), AddContactActivity.class);
@@ -59,12 +74,10 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
                 }
         );
 
-        this.contacts = new ArrayList<>();
 
 
 
-
-        final ContactListAdapter adapter = new ContactListAdapter(this, this);
+        contacts = new ArrayList<>();
         binding.listcontacts.setAdapter(adapter);
         binding.listcontacts.setLayoutManager(new LinearLayoutManager(this));
 
@@ -88,7 +101,6 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
 //        List<Contact> con = contactDao.index();
 //        Log.i("room" , contactDao.index().toString());
 
-        viewModel.getAllContacts(intent.getStringExtra("token"));
     }
 
     @Override

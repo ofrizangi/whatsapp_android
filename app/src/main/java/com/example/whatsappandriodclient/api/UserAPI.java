@@ -8,10 +8,11 @@ import com.example.whatsappandriodclient.ChatListActivity;
 import com.example.whatsappandriodclient.LoginActivity;
 import com.example.whatsappandriodclient.RegisterActivity;
 import com.example.whatsappandriodclient.dao.UserDao;
+import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.User;
 import com.example.whatsappandriodclient.objectAPI.UserLogin;
-import com.example.whatsappandriodclient.objectAPI.UserRegister;
 import com.example.whatsappandriodclient.objectAPI.ContactGet;
+import com.example.whatsappandriodclient.objectAPI.UserRegister;
 import com.example.whatsappandriodclient.repositories.UserRepository;
 
 import java.util.ArrayList;
@@ -77,18 +78,13 @@ public class UserAPI {
 
     public void getAllContacts(String token, UserRepository userRepository) {
         Call<List<ContactGet>> call = webServiceAPI.getAllContacts("Bearer " + token);
+        final List<Contact>[] contacts = new List[]{new ArrayList<>()};
         call.enqueue(new Callback<List<ContactGet>>() {
             @Override
             public void onResponse(Call<List<ContactGet>> call, Response<List<ContactGet>> response) {
                 if(response.isSuccessful()) {
-
                     List<ContactGet> contactGets = response.body();
-
-
-                    userRepository.insertContactsToDao(contactGets);
-//                    contactDao.insertAllContacts(contacts);
-//                    List<Contact> my = contactDao.index();
-
+                    ChatListActivity.getInstance().setContacts(userRepository.insertContactsToDao(contactGets));
                 }
                 else{
                     AlertDialog.Builder alert = new AlertDialog.Builder(ChatListActivity.getInstance());
@@ -103,9 +99,6 @@ public class UserAPI {
                 Log.i("in fail", "fail");
             }
         });
-
-
-
     }
 
 

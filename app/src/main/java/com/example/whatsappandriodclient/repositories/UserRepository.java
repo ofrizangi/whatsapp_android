@@ -88,7 +88,7 @@ public class UserRepository {
 
 
 
-    public void insertContactsToDao(List<ContactGet> contactGets){
+    public List<Contact> insertContactsToDao(List<ContactGet> contactGets){
         List<Contact> contacts = new ArrayList<>();
         for(ContactGet contact: contactGets){
             contacts.add(new Contact(contact.getId(), contact.getName(), contact.getServer(), userName));
@@ -96,8 +96,9 @@ public class UserRepository {
         List<Contact> contactList = join();
         contactDao.deleteMany(contactList);
         contactDao.insertMany(contacts);
-
         List<Contact> my = contactDao.index();
+
+        return contacts;
     }
 
     public LiveData<List<Contact>> getAll(){
@@ -105,7 +106,7 @@ public class UserRepository {
     }
 
     public void getAllContacts(String token){
-        api.getAllContacts(token, this);
+         api.getAllContacts(token, this);
     }
 
 
