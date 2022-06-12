@@ -3,7 +3,7 @@ package com.example.whatsappandriodclient.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.google.gson.annotations.SerializedName;
+import java.util.Date;
 
 @Entity
 public class Message {
@@ -23,11 +23,11 @@ public class Message {
     //@SerializedName("content")
     private String content;
     //@SerializedName("time")
-    private String time;
+    private Date time;
     //@SerializedName("sent")
     private boolean sent;
 
-    public Message(String content, String time, boolean sent, int contactID) {
+    public Message(String content, Date time, boolean sent, int contactID) {
         this.time = time;
         this.content = content;
         this.sent = sent;
@@ -43,7 +43,7 @@ public class Message {
         return content;
     }
 
-    public String getTime() {
+    public Date getTime() {
         return time;
     }
 
@@ -60,7 +60,7 @@ public class Message {
         this.content = content;
     }
 
-    public void setTime(String time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 

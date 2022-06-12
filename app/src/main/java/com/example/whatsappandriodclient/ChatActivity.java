@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.whatsappandriodclient.databinding.ActivityChatBinding;
+import com.example.whatsappandriodclient.entities.SendMessage;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -21,5 +22,11 @@ public class ChatActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         binding.contactname.setText(intent.getStringExtra("contactName"));
+
+        binding.sendMessage.setOnClickListener(v ->{
+                    String content = binding.message.getText().toString();
+                    SendMessage sendMessage = new SendMessage(content);
+                }
+        );
     }
 }

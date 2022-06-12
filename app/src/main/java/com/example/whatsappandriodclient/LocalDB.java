@@ -1,14 +1,16 @@
 package com.example.whatsappandriodclient;
 
 
+import static androidx.room.Room.databaseBuilder;
+
 import android.content.Context;
 
-import androidx.room.AutoMigration;
 import androidx.room.Database;
-import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import com.example.whatsappandriodclient.dao.ContactDao;
+import com.example.whatsappandriodclient.dao.Converters;
 import com.example.whatsappandriodclient.dao.MessageDao;
 import com.example.whatsappandriodclient.dao.UserDao;
 import com.example.whatsappandriodclient.entities.Contact;
@@ -21,7 +23,7 @@ import com.example.whatsappandriodclient.entities.User;
 //        @AutoMigration(from = 2, to = 3)}, exportSchema = false)
 
 @Database(entities = {Contact.class, Message.class, User.class}, version = 1, exportSchema = false)
-
+@TypeConverters({Converters.class})
 public abstract class LocalDB extends RoomDatabase {
 
     public abstract ContactDao contactDao();
@@ -34,8 +36,8 @@ public abstract class LocalDB extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (LocalDB.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context,
-                                    LocalDB.class, "five")
+                    INSTANCE = databaseBuilder(context,
+                                    LocalDB.class, "seven")
                             .allowMainThreadQueries()
                             .build();
                 }

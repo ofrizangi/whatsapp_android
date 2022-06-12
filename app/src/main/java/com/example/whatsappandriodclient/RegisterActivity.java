@@ -123,40 +123,4 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-//    public void addUser(UserRegister user) {
-//        Call<String> call = UserAPI.getInstance().getMyApi().createUser(user);
-//        call.enqueue(new Callback<String>() {
-//            @Override
-//            public void onResponse(Call<String> call, Response<String> response) {
-//                if(response.isSuccessful()){
-//                    String token = response.body();
-//                    if(token.compareTo("false") == 0){
-//                            AlertDialog.Builder alert = new AlertDialog.Builder(RegisterActivity.this);
-//                            alert.setTitle("error");
-//                            alert.setMessage("user name already exist");
-//                            alert.create().show();
-//                        }
-//                        else{
-//                            Intent intent = new Intent(getApplicationContext(), ChatListActivity.class);
-//                            intent.putExtra("userName", userName);
-//                            intent.putExtra("token", token);
-////                            intent.putExtra("image", image);
-//                            userName = "";
-////                            image = null;
-//                            startActivity(intent);
-//                        }
-//
-//                    Log.i("in response", "token");
-//                }
-//
-//            }
-//            @Override
-//            public void onFailure(Call<String> call, Throwable t) {
-//                Log.i("in fail", "fail");
-//            }
-//        });
-//
-//    }
-
-
 }

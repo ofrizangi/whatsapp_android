@@ -6,7 +6,6 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.room.Room;
 
 import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.dao.MessageDao;
@@ -15,10 +14,11 @@ import com.example.whatsappandriodclient.databinding.ActivityAddContactBinding;
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.ContactToAdd;
 import com.example.whatsappandriodclient.entities.ContactsOfUser;
-import com.example.whatsappandriodclient.entities.MessagesOfContact;
+import com.example.whatsappandriodclient.entities.Message;
 import com.example.whatsappandriodclient.entities.User;
 import com.example.whatsappandriodclient.viewmodels.ContactViewModel;
 
+import java.util.Date;
 import java.util.List;
 
 public class AddContactActivity extends AppCompatActivity {
@@ -49,13 +49,13 @@ public class AddContactActivity extends AppCompatActivity {
         String token = intent.getStringExtra("token");
         Log.i("chat", intent.getStringExtra("token"));
 
-        db = Room.databaseBuilder(getApplicationContext(), LocalDB.class, "five")
-                .allowMainThreadQueries()
-                .build();
-        contactDao = db.contactDao();
+        db = LocalDB.getDatabase(getApplicationContext());
+//        contactDao = db.contactDao();
         MessageDao  messageDao= db.messageDao();
         UserDao userDao = db.userDao();
-
+        messageDao.insert(new Message("hello", new Date(), true, 1));
+        List<Message> messages = messageDao.index();
+        Log.i("hek", "hek");
 
         binding.addcontact.setOnClickListener(v -> {
 
@@ -74,7 +74,7 @@ public class AddContactActivity extends AppCompatActivity {
             List<ContactsOfUser> contact = userDao.getContactsOfUser();
             List<Contact> contacts1 = contactDao.index();
 
-            List<MessagesOfContact> messages = contactDao.getMessagesOfContact();
+//            List<MessagesOfContact> messages = contactDao.getMessagesOfContact();
 
             finish();
             String nickName = binding.nickname.getText().toString();
