@@ -67,12 +67,8 @@ public class ChatActivity extends AppCompatActivity {
         binding.listMessages.setAdapter(adapter);
         binding.listMessages.setLayoutManager(new LinearLayoutManager(this));
 //        List<Message> messages= new ArrayList<>();
-//        messages.add(new Message("hy", new Date(), true, 1));
-//        messages.add(new Message("gy", new Date(), true, 1));
-//        messages.add(new Message("ty", new Date(), true, 1));
-//        messages.add(new Message("ey", new Date(), true, 1));
-//        adapter.setMessages(messages);
-        viewModel.get().observe(this, messages -> {
+
+        viewModelContact.get().observe(this, messages -> {
                     adapter.setMessages(messages);
                 }
         );

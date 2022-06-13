@@ -14,19 +14,9 @@ import java.util.List;
 public class MessageViewModel extends ViewModel {
 
     private MessageRepository messageRepository;
-    private LiveData<List<Message>> messages;
-
-
-
-
 
     public MessageViewModel(){
         this.messageRepository = new MessageRepository();
-//        this.messages = messageRepository.getAll();
-    }
-
-    public LiveData<List<Message>> get(){
-        return messages;
     }
 
     public void addMessage(String token , SendMessage message, String contactName, int contactId){
