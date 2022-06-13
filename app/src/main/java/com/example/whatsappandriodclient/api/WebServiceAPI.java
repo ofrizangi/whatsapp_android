@@ -2,7 +2,7 @@ package com.example.whatsappandriodclient.api;
 
 //import com.example.whatsappandriodclient.entities.User;
 
-import com.example.whatsappandriodclient.entities.SendMessage;
+import com.example.whatsappandriodclient.objectAPI.SendMessage;
 import com.example.whatsappandriodclient.objectAPI.ContactGet;
 import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
 import com.example.whatsappandriodclient.objectAPI.UserLogin;
