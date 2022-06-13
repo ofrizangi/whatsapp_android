@@ -2,7 +2,9 @@ package com.example.whatsappandriodclient.api;
 
 //import com.example.whatsappandriodclient.entities.User;
 
-import com.example.whatsappandriodclient.entities.SendMessage;
+import com.example.whatsappandriodclient.objectAPI.GetMessage;
+import com.example.whatsappandriodclient.objectAPI.Invitation;
+import com.example.whatsappandriodclient.objectAPI.SendMessage;
 import com.example.whatsappandriodclient.objectAPI.ContactGet;
 import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
 import com.example.whatsappandriodclient.objectAPI.UserLogin;
@@ -37,7 +39,12 @@ public interface WebServiceAPI {
     @POST("contacts/{id}/messages")
     Call<Void> sendMessage(@Header("authorization") String token, @Path(value = "id") String contactUserName, @Body SendMessage message);
 
+    @GET("contacts/{id}/messages")
+    Call<List<GetMessage>> getMessages(@Header("authorization") String token, @Path(value = "id") String contactUserName);
 
- }
+    @POST("invitations")
+    Call<Void> inviteContact(@Body Invitation invitation);
+
+}
 
 
