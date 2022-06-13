@@ -35,9 +35,6 @@ public class MessageAPI {
         return instance;
     }
 
-
-
-
     public void sendMessage(SendMessage message, String token, String contactName) {
         Call<Void> call = this.webServiceAPI.sendMessage("Bearer " + token, contactName, message);
         call.enqueue(new Callback<Void>() {

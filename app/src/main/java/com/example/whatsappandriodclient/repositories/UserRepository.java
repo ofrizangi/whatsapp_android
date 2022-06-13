@@ -70,9 +70,6 @@ public class UserRepository {
             List<Contact> contacts = join();
             setValue(contacts);
             // every time we will do set it will call all the observers
-
-
-
         }
 
 //        @Override
@@ -106,7 +103,7 @@ public class UserRepository {
     }
 
     public void getAllContacts(String token){
-         api.getAllContacts(token, this);
+         api.getAllContacts(token, this, this.contactListData);
     }
 
 

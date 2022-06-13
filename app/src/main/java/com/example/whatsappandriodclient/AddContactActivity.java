@@ -11,6 +11,7 @@ import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.databinding.ActivityAddContactBinding;
 import com.example.whatsappandriodclient.entities.User;
 import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
+import com.example.whatsappandriodclient.objectAPI.Invitation;
 import com.example.whatsappandriodclient.viewmodels.ContactViewModel;
 
 public class AddContactActivity extends AppCompatActivity {
@@ -73,6 +74,11 @@ public class AddContactActivity extends AppCompatActivity {
             String username = binding.username.getText().toString();
             String server = binding.server.getText().toString();
             viewModel.addContact(token, new ContactToAdd(username, nickName, server), intent.getStringExtra("userName"));
+
+            Invitation invitation = new Invitation(intent.getStringExtra("userName"), username, getString(R.string.url));
+            viewModel.inviteContact(invitation, server);
+
+
 
         });
 
