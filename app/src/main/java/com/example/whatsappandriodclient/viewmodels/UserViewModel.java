@@ -1,7 +1,10 @@
 package com.example.whatsappandriodclient.viewmodels;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.room.Query;
 
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.repositories.UserRepository;
@@ -30,7 +33,17 @@ public class UserViewModel extends ViewModel {
     }
 
     public Contact getAContact(int position){
-        return contactList.getValue().get(position);
+        Contact c =contactList.getValue().get(position);
+//          List<Contact> c0 =contactList.getValue();
+//          Contact c = c0.get(position);
+//        @Query("SELECT * FROM contact LIMIT  :position")
+//        LiveData<List<Contact>> getStudents(int position);
+
+        // Query
+//    getStudents(1); // returns the first row of the list
+
+//        Log.i("s","s");
+        return c;
     }
 
     public void getAllContacts(String token){

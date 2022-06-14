@@ -22,12 +22,12 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         private OnContactListener onContactListener;
 //        private final ImageView image;
 
-        private ContactViewHolder(View itemView, OnContactListener onContactListener){
+        private ContactViewHolder(View itemView, OnContactListener onMessageListener){
             super(itemView);
             this.contactNickName = itemView.findViewById(R.id.contactname);
 //            this.image = itemView.findViewById(R.id.imageView);
 //            this.image.setClipToOutline(true);
-            this.onContactListener = onContactListener;
+            this.onContactListener = onMessageListener;
 
             itemView.setOnClickListener(this);
         }

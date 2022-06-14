@@ -8,42 +8,45 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/linearLayout"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf ="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView"-->
-<!--            android:layout_gravity="start"-->
-<!--            android:layout_width="70dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:src="@drawable/avatar" />-->
+<!--        android:id="@+id/linearLayout"-->
+<!--        android:layout_width="325dp"-->
+<!--        android:layout_height="43dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:paddingLeft="10dp"-->
+<!--        android:paddingRight="10dp"-->
+<!--        app:layout_constraintBottom_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
 
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/imageView"-->
+        <!--            android:layout_gravity="start"-->
+        <!--            android:layout_width="70dp"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:src="@drawable/avatar" />-->
 
         <TextView
             android:id="@+id/contactname"
-            android:paddingLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_username"
             android:minHeight="48dp"
+            android:paddingLeft="10dp"
             android:textColor="#090808"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
     </LinearLayout>
+
 
     <RelativeLayout
         android:id="@+id/layout_gchat_chatbox"
@@ -81,6 +84,28 @@
 
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="609dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="49dp"
+        tools:ignore="MissingConstraints">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="-49dp"
+            tools:layout_editor_absoluteY="16dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listMessages"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

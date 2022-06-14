@@ -1,6 +1,9 @@
 package com.example.whatsappandriodclient.repositories;
 
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.whatsappandriodclient.ChatListActivity;
 import com.example.whatsappandriodclient.LocalDB;
 import com.example.whatsappandriodclient.api.ContactAPI;
@@ -27,6 +30,7 @@ public class ContactRepository {
     //    private UserRepository.ContactListData contactListData;
     private ContactAPI api;
     private int contactId;
+    private MessagListData messagListData;
 
 
     public ContactRepository(int contactId){
@@ -35,6 +39,7 @@ public class ContactRepository {
         this.contactDao = db.contactDao();
         this.api = ContactAPI.getInstance();
         this.messageDao = db.messageDao();
+        this.messagListData = new MessagListData();
         this.contactId = contactId;
     }
 
@@ -43,6 +48,7 @@ public class ContactRepository {
         this.contactDao = db.contactDao();
         this.messageDao = db.messageDao();
         this.api = ContactAPI.getInstance();
+        this.messagListData = new MessagListData();
     }
 
     public List<Message> join() {
@@ -56,7 +62,6 @@ public class ContactRepository {
         }
         return messageList;
     }
-
 
     public List<Message> insertMessageToRoom(List<GetMessage> messages){
         List<Message> newMessageList = new ArrayList<>();
@@ -83,6 +88,24 @@ public class ContactRepository {
 
     }
 
+    class MessagListData extends MutableLiveData<List<Message>> {
+
+        public MessagListData() {
+            super();
+            List<Message> messages = join();
+//            List<Message> messages = new ArrayList<>();
+//            messages.add(new Message("hy", new Date(), true, 1));
+//            messages.add(new Message("gy", new Date(), true, 1));
+//            messages.add(new Message("ty", new Date(), true, 1));
+//            messages.add(new Message("ey", new Date(), true, 1));
+            setValue(messages);
+            // every time we will do set it will call all the observers
+        }
+    }
+
+    public LiveData<List<Message>> getAll(){
+        return this.messagListData;
+    }
 
 
 //    class ContactListData extends MutableLiveData<List<Contact>> {
@@ -108,7 +131,6 @@ public class ContactRepository {
 //        InvitationAPI invitationAPI = new InvitationAPI(inviteServer);
 //        invitationAPI.inviteContact(invitation, token, contactName);
 //    }
-
 
     public void updateMessages(String token, String contactName){
         this.api.getAllMessages(token, this, contactName);
