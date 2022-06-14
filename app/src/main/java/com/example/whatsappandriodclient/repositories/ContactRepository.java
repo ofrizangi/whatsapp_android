@@ -9,7 +9,6 @@ import com.example.whatsappandriodclient.LocalDB;
 import com.example.whatsappandriodclient.api.ContactAPI;
 import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.dao.MessageDao;
-import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.Message;
 import com.example.whatsappandriodclient.entities.MessagesOfContact;
 import com.example.whatsappandriodclient.objectAPI.ContactToAdd;

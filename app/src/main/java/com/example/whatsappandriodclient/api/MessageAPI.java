@@ -41,6 +41,11 @@ public class MessageAPI {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()) {
+
+
+
+
+
                     Log.i("in send", "succeed");
                 }
                 else{
