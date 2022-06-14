@@ -67,7 +67,6 @@ public class ContactRepository {
         List<Message> newMessageList = new ArrayList<>();
 
         for(GetMessage message: messages){
-
             newMessageList.add(new Message(message.getContent(), stringToDate(message.getCreated()) , message.isSent(), this.contactId));
         }
         List<Message> myMessageList = join();
@@ -76,7 +75,7 @@ public class ContactRepository {
         return newMessageList;
     }
 
-    private Date stringToDate(String aDate) {
+    public static Date stringToDate(String aDate) {
 
         SimpleDateFormat format = new SimpleDateFormat(
                 "yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);

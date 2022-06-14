@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/send_message"
+        android:layout_toStartOf="@+id/sendMessage"
         android:background="@android:color/transparent"
         android:hint="Enter Message"
         android:inputType="text"
@@ -71,7 +71,7 @@
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/send_message"
+        android:id="@+id/sendMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

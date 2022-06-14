@@ -19,12 +19,16 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     class ContactViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final TextView contactNickName;
+        private final TextView time;
+        private final TextView lastmessage;
         private OnContactListener onContactListener;
 //        private final ImageView image;
 
         private ContactViewHolder(View itemView, OnContactListener onMessageListener){
             super(itemView);
             this.contactNickName = itemView.findViewById(R.id.contactname);
+            this.time = itemView.findViewById(R.id.time);
+            this.lastmessage = itemView.findViewById(R.id.lastmessage);
 //            this.image = itemView.findViewById(R.id.imageView);
 //            this.image.setClipToOutline(true);
             this.onContactListener = onMessageListener;
@@ -58,6 +62,14 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         if(contacts != null){
             final Contact current = contacts.get(position);
             contactViewHolder.contactNickName.setText(current.getContactNickName());
+            if(current.getLastDate() == null || current.getLastDate().equals("")){
+                contactViewHolder.time.setText("");
+            }
+            else{
+                String myTime = current.getLastDate().split(" ")[1];
+                contactViewHolder.time.setText(myTime);
+            }
+            contactViewHolder.lastmessage.setText(current.getLastMessage());
         }
     }
 

@@ -88,7 +88,7 @@ public class UserRepository {
     public List<Contact> insertContactsToDao(List<ContactGet> contactGets){
         List<Contact> contacts = new ArrayList<>();
         for(ContactGet contact: contactGets){
-            contacts.add(new Contact(contact.getId(), contact.getName(), contact.getServer(), userName));
+            contacts.add(new Contact(contact.getId(), contact.getName(), contact.getServer(), userName, contact.getLast(), contact.getLastdate()));
         }
         List<Contact> contactList = join();
         contactDao.deleteMany(contactList);
@@ -97,6 +97,7 @@ public class UserRepository {
 
         return contacts;
     }
+
 
     public LiveData<List<Contact>> getAll(){
         return this.contactListData;

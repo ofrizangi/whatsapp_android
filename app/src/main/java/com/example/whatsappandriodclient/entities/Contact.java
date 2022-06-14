@@ -3,26 +3,39 @@ package com.example.whatsappandriodclient.entities;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
 //, primaryKeys = {"contactUserName","userID"}
 @Entity(tableName = "contact")
 public class Contact {
 
     @PrimaryKey(autoGenerate = true)
-   //@SerializedName("id")
-    //@ColumnInfo(name= "id")
+
       private int id;
-//    @SerializedName("contactUserName")
-//    @ColumnInfo(name= "contactUserName")
+
     @NonNull
     private String contactUserName;
-//    @SerializedName("contactNickName")
-//    @ColumnInfo(name= "contactNickName")
+
     private String contactNickName;
-//    @SerializedName("server")
-//    @ColumnInfo(name= "server")
+
     private String server;
     @NonNull
     private String userID;
+
+
+    private String lastDate;
+
+    private String lastMessage;
+
+
+
+    public Contact( @NonNull String contactUserName, String contactNickName, String server, @NonNull String userID, String lastMessage, String lastDate) {
+        this.lastMessage = lastMessage;
+        this.lastDate = lastDate;
+        this.contactUserName = contactUserName;
+        this.contactNickName = contactNickName;
+        this.server = server;
+        this.userID = userID;
+    }
 
     public String getUserID() {
         return userID;
@@ -32,12 +45,20 @@ public class Contact {
         this.userID = userID;
     }
 
+    public void setLastDate(String lastDate) {
+        this.lastDate = lastDate;
+    }
 
-    public Contact( @NonNull String contactUserName, String contactNickName, String server, @NonNull String userID) {
-        this.contactUserName = contactUserName;
-        this.contactNickName = contactNickName;
-        this.server = server;
-        this.userID = userID;
+    public void setLastMessage(String lastMessage) {
+        this.lastMessage = lastMessage;
+    }
+
+    public String getLastDate() {
+        return lastDate;
+    }
+
+    public String getLastMessage() {
+        return lastMessage;
     }
 
     public int getId() {

@@ -8,10 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.whatsappandriodclient.adapters.ContactListAdapter;
 import com.example.whatsappandriodclient.adapters.MessageListAdapter;
 import com.example.whatsappandriodclient.databinding.ActivityChatBinding;
-import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.Message;
 import com.example.whatsappandriodclient.objectAPI.SendMessage;
 import com.example.whatsappandriodclient.viewmodels.ContactViewModel;
@@ -19,7 +17,6 @@ import com.example.whatsappandriodclient.viewmodels.ContactViewModelFactory;
 import com.example.whatsappandriodclient.viewmodels.MessageViewModel;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
@@ -55,10 +52,14 @@ public class ChatActivity extends AppCompatActivity {
 
         binding.contactname.setText(intent.getStringExtra("contactNickName"));
         Log.i("token", intent.getStringExtra("token"));
+
         binding.sendMessage.setOnClickListener(v -> {
                     String content = binding.message.getText().toString();
-                    SendMessage sendMessage = new SendMessage(content);
-                    viewModel.addMessage(intent.getStringExtra("token"), sendMessage, intent.getStringExtra("contactUserName"), intent.getIntExtra("contactId", 0));
+                    if(!content.equals("")){
+                        SendMessage sendMessage = new SendMessage(content);
+                        viewModel.addMessage(intent.getStringExtra("token"), sendMessage, intent.getStringExtra("contactUserName"), intent.getIntExtra("contactId", 0), intent.getStringExtra("userName"));
+                        binding.message.setText("");
+                    }
                 }
         );
         messages = new ArrayList<>();

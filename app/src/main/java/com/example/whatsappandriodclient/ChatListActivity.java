@@ -97,6 +97,7 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
         intent.putExtra("contactUserName" , contact.getContactUserName());
         intent.putExtra("contactId" , contact.getId());
         intent.putExtra("token" , myIntent.getStringExtra("token"));
+        intent.putExtra("userName" , myIntent.getStringExtra("userName"));
         startActivity(intent);
     }
 
