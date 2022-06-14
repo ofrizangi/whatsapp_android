@@ -30,7 +30,6 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
         return sInstance;
     }
 
-    private LocalDB db;
 
     public List<Contact> getContacts() {
         return contacts;
@@ -86,18 +85,6 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
                 }
         );
 
-
-
-//        ArrayAdapter<Contact> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, contacts);
-//        binding.listcontacts.setAdapter(adapter2);
-
-
-//        Contact c= new Contact(1, "sivan", "sss", "local");
-//        contactDao.insert(c);
-
-
-//        List<Contact> con = contactDao.index();
-//        Log.i("room" , contactDao.index().toString());
 
     }
 

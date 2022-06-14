@@ -69,14 +69,13 @@ public class AddContactActivity extends AppCompatActivity {
 
 //            List<MessagesOfContact> messages = contactDao.getMessagesOfContact();
 
-            finish();
             String nickName = binding.nickname.getText().toString();
             String username = binding.username.getText().toString();
             String server = binding.server.getText().toString();
-            viewModel.addContact(token, new ContactToAdd(username, nickName, server), intent.getStringExtra("userName"));
-
             Invitation invitation = new Invitation(intent.getStringExtra("userName"), username, getString(R.string.url));
-            viewModel.inviteContact(invitation, server);
+            viewModel.addContact(token, new ContactToAdd(username, nickName, server), intent.getStringExtra("userName"), invitation);
+
+//            viewModel.inviteContact(invitation, server,intent.getStringExtra("token"), username );
 
 
 

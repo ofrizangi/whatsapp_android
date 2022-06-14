@@ -22,8 +22,8 @@ public class ContactViewModel extends ViewModel {
 
 
 
-    public void addContact(String token , ContactToAdd contact, String userID){
-        this.cRepository.addContact(contact,  token, userID);
+    public void addContact(String token , ContactToAdd contact, String userID, Invitation invitation){
+        this.cRepository.addContact(contact,  token, userID, invitation);
     }
 
 
@@ -31,9 +31,9 @@ public class ContactViewModel extends ViewModel {
         this.cRepository.updateMessages(token,  contactName);
     }
 
-    public void inviteContact(Invitation invitation, String inviteServer){
-        this.cRepository.inviteContact(invitation, inviteServer);
-    }
+//    public void inviteContact(Invitation invitation, String inviteServer, String token , String contactName){
+//        this.cRepository.inviteContact(invitation, inviteServer, token, contactName);
+//    }
 
 
 }

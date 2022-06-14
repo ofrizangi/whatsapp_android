@@ -1,12 +1,11 @@
 package com.example.whatsappandriodclient.api;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.util.Log;
 
 import com.example.whatsappandriodclient.AddContactActivity;
 import com.example.whatsappandriodclient.ChatActivity;
-import com.example.whatsappandriodclient.ChatListActivity;
+import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
 import com.example.whatsappandriodclient.objectAPI.GetMessage;
 import com.example.whatsappandriodclient.objectAPI.Invitation;
@@ -28,6 +27,7 @@ public class ContactAPI {
     private static ContactAPI instance = null;
     Retrofit retrofit;
     WebServiceAPI webServiceAPI;
+
 
     public ContactAPI() {
         Gson gson = new GsonBuilder()
@@ -52,17 +52,14 @@ public class ContactAPI {
         return webServiceAPI;
     }
 
-    public void addContact(ContactToAdd contact, String token, String userName) {
+    public void addContact(ContactToAdd contact, String token, String userName, Invitation invitation, ContactDao contactDao) {
         Call<Void> call = this.webServiceAPI.addContact("Bearer " + token, contact);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()) {
-                    Intent myIntent = new Intent(AddContactActivity.getInstance(), ChatListActivity.class);
-                    myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    myIntent.putExtra("token", token);
-                    myIntent.putExtra("userName", userName);
-                    AddContactActivity.getInstance().startActivity(myIntent);
+                    InvitationAPI invitationAPI = new InvitationAPI(contact.getServer());
+                    invitationAPI.inviteContact(invitation, token, contact,  userName , contactDao);
                 }
                 else{
                     AlertDialog.Builder alert = new AlertDialog.Builder(AddContactActivity.getInstance());
@@ -70,7 +67,6 @@ public class ContactAPI {
                     alert.setMessage("something went wrong");
                     alert.create().show();
                 }
-                    Log.i("in response", "succeed");
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
@@ -80,42 +76,29 @@ public class ContactAPI {
 
     }
 
-    public void inviteContact(Invitation invitation, String contactServer) {
-//        String server = "http://10.0.2.2:" +  contactServer + "/api/";
-//        Retrofit newRetrofit = new Retrofit.Builder()
-//                .baseUrl(server)
-//                .addConverterFactory(ScalarsConverterFactory.create())
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//        WebServiceAPI newWebServer = newRetrofit.create(WebServiceAPI.class);
-//        Call<Void> call = newWebServer.inviteContact(invitation);
-//        call.enqueue(new Callback<Void>() {
-//            @Override
-//            public void onResponse(Call<Void> call, Response<Void> response) {
-//                if(response.isSuccessful()) {
-//                    Log.i("succed", "s");
-//                }
-//                else{
+
+    public void deleteContact(String token, String contactName) {
+        Call<Void> call = this.webServiceAPI.deleteContact("Bearer " + token, contactName);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()) {
+                    Log.i("in response", "succeed");
+                }
+                else{
 //                    AlertDialog.Builder alert = new AlertDialog.Builder(AddContactActivity.getInstance());
 //                    alert.setTitle("error");
 //                    alert.setMessage("something went wrong");
 //                    alert.create().show();
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<Void> call, Throwable t) {
-//                Log.i("in fail", "fail");
-//            }
-//        });
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.i("in fail", "fail");
+            }
+        });
 
     }
-
-
-
-
-
-
-
 
     public void getAllMessages(String token, ContactRepository contactRepository, String contactName) {
         Call<List<GetMessage>> call = webServiceAPI.getMessages("Bearer " + token, contactName);
@@ -125,6 +108,7 @@ public class ContactAPI {
                 if(response.isSuccessful()) {
                     // do set value when have mutable elements
                     contactRepository.insertMessageToRoom(response.body());
+
                 }
                 else{
                     AlertDialog.Builder alert = new AlertDialog.Builder(ChatActivity.getInstance());

@@ -6,7 +6,6 @@ import com.example.whatsappandriodclient.LocalDB;
 import com.example.whatsappandriodclient.api.ContactAPI;
 import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.dao.MessageDao;
-import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.Message;
 import com.example.whatsappandriodclient.entities.MessagesOfContact;
 import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
@@ -25,7 +24,7 @@ public class ContactRepository {
 
     private ContactDao contactDao;
     private MessageDao messageDao;
-//    private UserRepository.ContactListData contactListData;
+    //    private UserRepository.ContactListData contactListData;
     private ContactAPI api;
     private int contactId;
 
@@ -99,15 +98,16 @@ public class ContactRepository {
 //        return this.contactListData;
 //    }
 
-    public void addContact(final ContactToAdd contact, final String token, String userID){
-        this.api.addContact(contact, token, userID);
-        Contact contact1 = new Contact(contact.getContactName(), contact.getContactNickName(), contact.getServer(), userID);
-        this.contactDao.insert(contact1);
+    public void addContact(final ContactToAdd contact, final String token, String userID, Invitation invitation){
+        this.api.addContact(contact, token, userID, invitation, this.contactDao);
+//        Contact contact1 = new Contact(contact.getContactName(), contact.getContactNickName(), contact.getServer(), userID);
+//        this.contactDao.insert(contact1);
     }
 
-    public void inviteContact(final Invitation invitation, final String inviteServer){
-        this.api.inviteContact(invitation, inviteServer);
-    }
+//    public void inviteContact(final Invitation invitation, final String inviteServer, String token , String contactName){
+//        InvitationAPI invitationAPI = new InvitationAPI(inviteServer);
+//        invitationAPI.inviteContact(invitation, token, contactName);
+//    }
 
 
     public void updateMessages(String token, String contactName){

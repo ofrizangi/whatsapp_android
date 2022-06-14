@@ -39,7 +39,6 @@ public class ChatActivity extends AppCompatActivity {
 
         viewModelContact = new ViewModelProvider(this, new ContactViewModelFactory(intent.getIntExtra("contactId", 0))).get(ContactViewModel.class);
 
-
         viewModelContact.updateMessages(intent.getStringExtra("token"), intent.getStringExtra("contactUserName"));
 
         binding.contactname.setText(intent.getStringExtra("contactNickName"));
