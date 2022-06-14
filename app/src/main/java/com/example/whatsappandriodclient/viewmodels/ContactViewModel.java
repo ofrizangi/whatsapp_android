@@ -42,6 +42,10 @@ public class ContactViewModel extends ViewModel {
         this.cRepository.updateMessages(token,  contactName);
     }
 
+    public void addMessageToView(Message message){
+        this.cRepository.addMessageToView(message);
+    }
+
 //    public void inviteContact(Invitation invitation, String inviteServer, String token , String contactName){
 //        this.cRepository.inviteContact(invitation, inviteServer, token, contactName);
 //    }

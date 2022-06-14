@@ -1,10 +1,7 @@
 package com.example.whatsappandriodclient.viewmodels;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.room.Query;
 
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.repositories.UserRepository;
@@ -44,6 +41,9 @@ public class UserViewModel extends ViewModel {
 
 //        Log.i("s","s");
         return c;
+    }
+    public void setContactView(){
+        this.userRepository.setContactView();
     }
 
     public void getAllContacts(String token){

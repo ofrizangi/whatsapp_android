@@ -3,6 +3,7 @@ package com.example.whatsappandriodclient;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -15,14 +16,18 @@ import com.example.whatsappandriodclient.objectAPI.SendMessage;
 import com.example.whatsappandriodclient.viewmodels.ContactViewModel;
 import com.example.whatsappandriodclient.viewmodels.ContactViewModelFactory;
 import com.example.whatsappandriodclient.viewmodels.MessageViewModel;
+import com.example.whatsappandriodclient.viewmodels.UserViewModel;
+import com.example.whatsappandriodclient.viewmodels.UserViewModelFactory;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
 
     private MessageViewModel viewModel;
     private ContactViewModel viewModelContact;
+    private UserViewModel userViewModel;
     private ActivityChatBinding binding;
 
     private static ChatActivity sInstance;
@@ -36,6 +41,8 @@ public class ChatActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         adapter = new MessageListAdapter(this);
 
@@ -48,6 +55,8 @@ public class ChatActivity extends AppCompatActivity {
 
         viewModelContact = new ViewModelProvider(this, new ContactViewModelFactory(intent.getStringExtra("contactId"))).get(ContactViewModel.class);
 
+        userViewModel = new ViewModelProvider(this, new UserViewModelFactory(intent.getStringExtra("userName"))).get(UserViewModel.class);
+
         viewModelContact.updateMessages(intent.getStringExtra("token"), intent.getStringExtra("contactUserName"));
 
         binding.contactname.setText(intent.getStringExtra("contactNickName"));
@@ -59,6 +68,9 @@ public class ChatActivity extends AppCompatActivity {
                         SendMessage sendMessage = new SendMessage(content);
                         viewModel.addMessage(intent.getStringExtra("token"), sendMessage, intent.getStringExtra("contactUserName"), intent.getStringExtra("contactId"), intent.getStringExtra("userName"));
                         binding.message.setText("");
+                        Message message = new Message(sendMessage.getContent(), new Date(), true, intent.getStringExtra("contactId"));
+                        viewModelContact.addMessageToView(message);
+//                        userViewModel.setContactView();
                     }
                 }
         );

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -28,11 +29,13 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     // this is not working - need to find the right source
-    private Uri image = Uri.parse("android.resource://com.example.whatsappandriodclient/drawable/avatar.png");
+    private String image = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         sInstance = this;
@@ -60,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
                     String nickName = binding.nickname.getText().toString();
                     String password = binding.password.getText().toString();
                     String confirm = binding.confirm.getText().toString();
-                    String image = "";
+                    String image = this.image;
 
                     if(checkPassAndUser(password, confirm, userName)) {
                         UserRegister user = new UserRegister(userName, nickName, password, image, new ArrayList<>());
@@ -101,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-    public void setImage(Uri image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -113,9 +116,10 @@ public class RegisterActivity extends AppCompatActivity {
         if (requestCode == IMAGE_PICK_CODE){
             if (resultCode == Activity.RESULT_OK && data!=null) {
                 Uri uri = data.getData();
-                setImage(uri);
+                setImage(uri.toString());
+                Uri uri2 = Uri.parse(uri.toString());
                 Log.i("image", uri.toString());
-                binding.imageView.setImageURI(uri);
+                binding.imageView.setImageURI(uri2);
             }
         }
 

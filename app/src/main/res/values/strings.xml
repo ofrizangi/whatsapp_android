@@ -23,7 +23,7 @@
 
     <string name="url">localhost:5271</string>
 
-    <string name="add_image">add image</string>
+    <string name="add_image"> <u>add image</u></string>
     <string name="server">Server</string>
     <string name="add_contact">Add Contact</string>
 

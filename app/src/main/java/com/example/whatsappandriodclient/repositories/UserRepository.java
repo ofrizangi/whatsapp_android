@@ -61,13 +61,20 @@ public class UserRepository {
         return contactList;
     }
 
+    public void setContactView(){
+        this.contactListData.contacts = join();
+        contactListData.setValue(this.contactListData.contacts);
+    }
+
 
 
     class ContactListData extends MutableLiveData<List<Contact>> {
 
+        private List<Contact> contacts;
+
         public ContactListData(){
             super();
-            List<Contact> contacts = join();
+            contacts = join();
             setValue(contacts);
             // every time we will do set it will call all the observers
         }

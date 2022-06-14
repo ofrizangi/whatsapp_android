@@ -37,7 +37,7 @@ public abstract class LocalDB extends RoomDatabase {
             synchronized (LocalDB.class) {
                 if (INSTANCE == null) {
                     INSTANCE = databaseBuilder(context,
-                                    LocalDB.class, "milion2")
+                                    LocalDB.class, "milion3")
                             .allowMainThreadQueries()
                             .build();
                 }

@@ -87,11 +87,19 @@ public class ContactRepository {
 
     }
 
+    public void addMessageToView(Message message){
+        this.messagListData.messages.add(message);
+        messagListData.setValue(this.messagListData.messages);
+    }
+
+
     class MessagListData extends MutableLiveData<List<Message>> {
+
+        private List<Message> messages;
 
         public MessagListData() {
             super();
-            List<Message> messages = join();
+            this.messages = join();
 //            List<Message> messages = new ArrayList<>();
 //            messages.add(new Message("hy", new Date(), true, 1));
 //            messages.add(new Message("gy", new Date(), true, 1));
@@ -100,6 +108,15 @@ public class ContactRepository {
             setValue(messages);
             // every time we will do set it will call all the observers
         }
+
+//        @Override
+//        protected void onActive(){
+//            super.onActive();
+//
+//            new Thread(() -> {
+//                messagListData.postValue(contactDao.get(contactKey));
+//            }).start();
+//        }
     }
 
     public LiveData<List<Message>> getAll(){

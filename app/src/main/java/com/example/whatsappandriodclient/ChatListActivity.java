@@ -3,13 +3,13 @@ package com.example.whatsappandriodclient;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.whatsappandriodclient.adapters.ContactListAdapter;
-//import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.databinding.ActivityChatListBinding;
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.viewmodels.UserViewModel;
@@ -47,6 +47,8 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         adapter = new ContactListAdapter(this, this);
 
@@ -87,6 +89,15 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
 
 
     }
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        viewModel.setContactView();
+    }
+
+
 
     @Override
     public void onContactClick(int position) {

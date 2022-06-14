@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsappandriodclient.R;
-import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.Message;
 
 import java.util.List;
@@ -19,6 +18,9 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     private final LayoutInflater minflater;
     private List<Message> messages;
+
+    private static final int LAYOUT_ONE = 0;
+    private static final int LAYOUT_TWO = 1;
 
     class MessageViewHolder extends RecyclerView.ViewHolder {
 
@@ -32,14 +34,37 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         }
     }
 
+    @Override
+    public int getItemViewType(int position)
+    {
+        if(messages.get(position).isSent())
+            return LAYOUT_ONE;
+        else
+            return LAYOUT_TWO;
+    }
+
     public MessageListAdapter(Context context){
         minflater = LayoutInflater.from(context);
     }
 
     @Override
     public MessageViewHolder onCreateViewHolder(ViewGroup parent , int viewType){
-        View itemView = minflater.inflate(R.layout.message, parent, false);
-        return new MessageViewHolder(itemView);
+        MessageViewHolder viewHolder = null;
+
+        if(viewType==LAYOUT_ONE)
+        {
+            View itemView = minflater.inflate(R.layout.send_message, parent, false);
+            viewHolder = new MessageViewHolder(itemView);
+        }
+        else
+        {
+            View itemView = minflater.inflate(R.layout.recieve_message, parent, false);
+            viewHolder= new MessageViewHolder(itemView);
+        }
+
+        return viewHolder;
+//        View itemView = minflater.inflate(R.layout.message, parent, false);
+//        return new MessageViewHolder(itemView);
     }
 
     @Override

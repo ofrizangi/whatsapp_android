@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.whatsappandriodclient.ChatActivity;
 import com.example.whatsappandriodclient.dao.ContactDao;
+import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.objectAPI.SendMessage;
 import com.example.whatsappandriodclient.objectAPI.Transfer;
 
@@ -44,10 +45,8 @@ public class MessageAPI {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()) {
 
-                    // if the message sent sucessfuly we want to transfer it to the other client
-                    // do it by id!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//                    Contact contact = contactDao.get(id);
-                    TransferAPI transferAPI = new TransferAPI("localhost:5271");
+                    Contact contact = contactDao.get(id);
+                    TransferAPI transferAPI = new TransferAPI(contact.getServer());
                     Transfer transfer = new Transfer(userName, contactName, message.getContent());
                     transferAPI.transferMessage(transfer);
                     Log.i("in send", "succeed");

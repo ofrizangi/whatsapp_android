@@ -1,15 +1,21 @@
 package com.example.whatsappandriodclient.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.whatsappandriodclient.ChatListActivity;
+import com.example.whatsappandriodclient.LocalDB;
 import com.example.whatsappandriodclient.R;
+import com.example.whatsappandriodclient.dao.UserDao;
 import com.example.whatsappandriodclient.entities.Contact;
+import com.example.whatsappandriodclient.entities.User;
 
 import java.util.List;
 
@@ -22,13 +28,14 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         private final TextView time;
         private final TextView lastmessage;
         private OnContactListener onContactListener;
-//        private final ImageView image;
+        private final ImageView image;
 
         private ContactViewHolder(View itemView, OnContactListener onMessageListener){
             super(itemView);
             this.contactNickName = itemView.findViewById(R.id.contactname);
             this.time = itemView.findViewById(R.id.time);
             this.lastmessage = itemView.findViewById(R.id.lastmessage);
+            this.image = itemView.findViewById(R.id.imageView);
 //            this.image = itemView.findViewById(R.id.imageView);
 //            this.image.setClipToOutline(true);
             this.onContactListener = onMessageListener;
@@ -69,6 +76,21 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
                 String myTime = current.getLastDate().split(" ")[1];
                 contactViewHolder.time.setText(myTime);
             }
+            LocalDB localDB = LocalDB.getDatabase(ChatListActivity.getInstance());
+            UserDao userDao = localDB.userDao();
+            User user = userDao.get(current.getContactUserName());
+            if(user.getImage() != ""){
+                Uri uri = Uri.parse(user.getImage());
+//                contactViewHolder.image.setImageURI(uri);
+//                contactViewHolder.image.setImageURI(Uri.parse(new File(user.getImage()).toString()));
+//                holder.imgUserPhoto.setImageURI();
+
+//                Glide.with(context)
+//                        .load(new File(uri.getPath()))
+//                        .into(imageView);
+            }
+
+
             contactViewHolder.lastmessage.setText(current.getLastMessage());
         }
     }
