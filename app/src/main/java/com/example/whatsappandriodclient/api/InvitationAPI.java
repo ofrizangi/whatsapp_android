@@ -46,7 +46,9 @@ public class InvitationAPI {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()) {
-                    Contact contact1 = new Contact(contact.getContactName(), contact.getContactNickName(), contact.getServer(), userID, "", "");
+                    Contact c = contactDao.getIDMax();
+                    int id = c.getId() +1;
+                    Contact contact1 = new Contact(contact.getContactName(), contact.getContactNickName(), contact.getServer(), userID,"","", id);
                     contactDao.insert(contact1);
                     Intent myIntent = new Intent(AddContactActivity.getInstance(), ChatListActivity.class);
 //                    myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

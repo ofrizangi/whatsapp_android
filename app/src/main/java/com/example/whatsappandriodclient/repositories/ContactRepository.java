@@ -120,17 +120,13 @@ public class ContactRepository {
 //        return this.contactListData;
 //    }
 
-    public void addContact(final ContactToAdd contact, final String token, String userID){
-        this.api.addContact(contact, token, userID);
-        Contact c = contactDao.getIDMax();
-        int id = c.getId() +1;
-        Contact contact1 = new Contact(contact.getContactName(), contact.getContactNickName(), contact.getServer(), userID, id);
-        this.contactDao.insert(contact1);
+    public void addContact(ContactToAdd contact, String token, String userName, Invitation invitation){
+        this.api.addContact(contact, token, userName, invitation, contactDao);
     }
 
-    public void inviteContact(final Invitation invitation, final String inviteServer){
-        this.api.inviteContact(invitation, inviteServer);
-    }
+//    public void inviteContact(final Invitation invitation, final String inviteServer){
+//        this.api.inviteContact(invitation, inviteServer);
+//    }
 
     public void updateMessages(String token, String contactName){
         this.api.getAllMessages(token, this, contactName);
