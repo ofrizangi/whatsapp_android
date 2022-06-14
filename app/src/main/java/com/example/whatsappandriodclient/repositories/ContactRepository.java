@@ -27,7 +27,7 @@ public class ContactRepository {
 
     private ContactDao contactDao;
     private MessageDao messageDao;
-    //    private UserRepository.ContactListData contactListData;
+//    private UserRepository.ContactListData contactListData;
     private ContactAPI api;
     private int contactId;
     private MessagListData messagListData;
@@ -120,16 +120,17 @@ public class ContactRepository {
 //        return this.contactListData;
 //    }
 
-    public void addContact(final ContactToAdd contact, final String token, String userID, Invitation invitation){
-        this.api.addContact(contact, token, userID, invitation, this.contactDao);
-//        Contact contact1 = new Contact(contact.getContactName(), contact.getContactNickName(), contact.getServer(), userID);
-//        this.contactDao.insert(contact1);
+    public void addContact(final ContactToAdd contact, final String token, String userID){
+        this.api.addContact(contact, token, userID);
+        Contact c = contactDao.getIDMax();
+        int id = c.getId() +1;
+        Contact contact1 = new Contact(contact.getContactName(), contact.getContactNickName(), contact.getServer(), userID, id);
+        this.contactDao.insert(contact1);
     }
 
-//    public void inviteContact(final Invitation invitation, final String inviteServer, String token , String contactName){
-//        InvitationAPI invitationAPI = new InvitationAPI(inviteServer);
-//        invitationAPI.inviteContact(invitation, token, contactName);
-//    }
+    public void inviteContact(final Invitation invitation, final String inviteServer){
+        this.api.inviteContact(invitation, inviteServer);
+    }
 
     public void updateMessages(String token, String contactName){
         this.api.getAllMessages(token, this, contactName);
