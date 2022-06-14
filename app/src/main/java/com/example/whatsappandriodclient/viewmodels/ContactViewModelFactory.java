@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 public class ContactViewModelFactory implements ViewModelProvider.Factory {
-    private int contactId;
+    private String contactId;
 
-    public ContactViewModelFactory(int contactId){
+    public ContactViewModelFactory(String contactId){
         this.contactId = contactId;
     }
 

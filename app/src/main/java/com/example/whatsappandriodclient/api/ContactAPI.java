@@ -3,9 +3,12 @@ package com.example.whatsappandriodclient.api;
 import android.app.AlertDialog;
 import android.util.Log;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.whatsappandriodclient.AddContactActivity;
 import com.example.whatsappandriodclient.ChatActivity;
 import com.example.whatsappandriodclient.dao.ContactDao;
+import com.example.whatsappandriodclient.entities.Message;
 import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
 import com.example.whatsappandriodclient.objectAPI.GetMessage;
 import com.example.whatsappandriodclient.objectAPI.Invitation;
@@ -100,14 +103,14 @@ public class ContactAPI {
 
     }
 
-    public void getAllMessages(String token, ContactRepository contactRepository, String contactName) {
+    public void getAllMessages(String token, ContactRepository contactRepository, String contactName, MutableLiveData<List<Message>> messages) {
         Call<List<GetMessage>> call = webServiceAPI.getMessages("Bearer " + token, contactName);
         call.enqueue(new Callback<List<GetMessage>>() {
             @Override
             public void onResponse(Call<List<GetMessage>> call, Response<List<GetMessage>> response) {
                 if(response.isSuccessful()) {
                     // do set value when have mutable elements
-                    contactRepository.insertMessageToRoom(response.body());
+                    messages.setValue(contactRepository.insertMessageToRoom(response.body()));
 
                 }
                 else{

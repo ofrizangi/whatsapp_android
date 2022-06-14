@@ -29,18 +29,18 @@ public class ContactRepository {
     private MessageDao messageDao;
 //    private UserRepository.ContactListData contactListData;
     private ContactAPI api;
-    private int contactId;
+    private String contactKey;
     private MessagListData messagListData;
 
 
-    public ContactRepository(int contactId){
+    public ContactRepository(String contactKey){
 
         LocalDB db = LocalDB.getDatabase(ChatListActivity.getInstance());
         this.contactDao = db.contactDao();
         this.api = ContactAPI.getInstance();
         this.messageDao = db.messageDao();
+        this.contactKey = contactKey;
         this.messagListData = new MessagListData();
-        this.contactId = contactId;
     }
 
     public ContactRepository(){
@@ -55,7 +55,7 @@ public class ContactRepository {
         List<Message> messageList = new ArrayList<>();
         List<MessagesOfContact> messages = contactDao.getMessagesOfContact();
         for (MessagesOfContact messagesOfContact : messages) {
-            if (messagesOfContact.contact.getId() == this.contactId) {
+            if (messagesOfContact.contact.getKey().equals(this.contactKey)) {
                 messageList = messagesOfContact.messages;
                 return messageList;
             }
@@ -67,7 +67,7 @@ public class ContactRepository {
         List<Message> newMessageList = new ArrayList<>();
 
         for(GetMessage message: messages){
-            newMessageList.add(new Message(message.getContent(), stringToDate(message.getCreated()) , message.isSent(), this.contactId));
+            newMessageList.add(new Message(message.getContent(), stringToDate(message.getCreated()) , message.isSent(), this.contactKey));
         }
         List<Message> myMessageList = join();
         messageDao.deleteMany(myMessageList);
@@ -129,6 +129,6 @@ public class ContactRepository {
 //    }
 
     public void updateMessages(String token, String contactName){
-        this.api.getAllMessages(token, this, contactName);
+        this.api.getAllMessages(token, this, contactName, this.messagListData);
     }
 }

@@ -3,7 +3,6 @@ package com.example.whatsappandriodclient.viewmodels;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.Message;
 import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
 import com.example.whatsappandriodclient.objectAPI.Invitation;
@@ -18,7 +17,7 @@ public class ContactViewModel extends ViewModel {
 
 //    private LiveData<List<Contact>> contactList;
 
-    public ContactViewModel(int contactId){
+    public ContactViewModel(String contactId){
         this.cRepository = new ContactRepository(contactId);
         this.messageList = cRepository.getAll();
 

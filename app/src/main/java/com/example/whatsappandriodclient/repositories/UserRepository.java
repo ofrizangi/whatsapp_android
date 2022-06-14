@@ -87,15 +87,15 @@ public class UserRepository {
 
     public List<Contact> insertContactsToDao(List<ContactGet> contactGets){
         List<Contact> contacts = new ArrayList<>();
-        Contact c = contactDao.getIDMax();
-        int id;
-        if (c == null) {
-            id =1;
-        }else {
-            id = c.getId() +1;
-        }
+//        Contact c = contactDao.getIDMax();
+//        int id;
+//        if (c == null) {
+//            id =1;
+//        }else {
+//            id = c.getId() +1;
+//        }
         for(ContactGet contact: contactGets){
-            contacts.add(new Contact(contact.getId(), contact.getName(), contact.getServer(), userName, contact.getLast(), contact.getLastdate(), id++));
+            contacts.add(new Contact(this.userName + contact.getId(), contact.getId(), contact.getName(), contact.getServer(),this.userName,  contact.getLast(), contact.getLastdate()));
         }
         List<Contact> contactList = join();
         contactDao.deleteMany(contactList);

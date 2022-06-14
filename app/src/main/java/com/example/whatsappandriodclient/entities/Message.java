@@ -8,32 +8,28 @@ import java.util.Date;
 @Entity
 public class Message {
     @PrimaryKey(autoGenerate = true)
-    //@SerializedName("id")
     private int id;
-
-    public int getContactID() {
-        return contactID;
-    }
-
-    public void setContactID(int contactID) {
-        this.contactID = contactID;
-    }
-
-    private int contactID;
-    //@SerializedName("content")
     private String content;
-    //@SerializedName("time")
     private Date time;
-    //@SerializedName("sent")
     private boolean sent;
 
-    public Message(String content, Date time, boolean sent, int contactID) {
+    private String contactKey;
+
+
+    public Message(String content, Date time, boolean sent, String contactKey) {
         this.time = time;
         this.content = content;
         this.sent = sent;
-        this.contactID = contactID;
+        this.contactKey = contactKey;
     }
 
+    public String getContactKey() {
+        return contactKey;
+    }
+
+    public void setContactKey(String contactKey) {
+        this.contactKey = contactKey;
+    }
 
     public int getId() {
         return id;

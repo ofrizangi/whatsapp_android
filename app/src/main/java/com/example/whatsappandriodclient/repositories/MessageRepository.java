@@ -28,7 +28,7 @@ public class MessageRepository {
     }
 
 
-    public void addMessage(final SendMessage message, final String token, final String contactName, final int contactId, final String userName){
+    public void addMessage(final SendMessage message, final String token, final String contactName, final String contactId, final String userName){
         this.api.sendMessage(message, token, contactName, contactDao, contactId, userName);
         Message message1 = new Message(message.getContent(), new Date(), true, contactId);
         this.messageDao.insert(message1);

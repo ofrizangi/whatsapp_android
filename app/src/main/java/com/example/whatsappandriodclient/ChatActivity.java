@@ -46,7 +46,7 @@ public class ChatActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        viewModelContact = new ViewModelProvider(this, new ContactViewModelFactory(intent.getIntExtra("contactId", 0))).get(ContactViewModel.class);
+        viewModelContact = new ViewModelProvider(this, new ContactViewModelFactory(intent.getStringExtra("contactId"))).get(ContactViewModel.class);
 
         viewModelContact.updateMessages(intent.getStringExtra("token"), intent.getStringExtra("contactUserName"));
 
@@ -57,7 +57,7 @@ public class ChatActivity extends AppCompatActivity {
                     String content = binding.message.getText().toString();
                     if(!content.equals("")){
                         SendMessage sendMessage = new SendMessage(content);
-                        viewModel.addMessage(intent.getStringExtra("token"), sendMessage, intent.getStringExtra("contactUserName"), intent.getIntExtra("contactId", 0), intent.getStringExtra("userName"));
+                        viewModel.addMessage(intent.getStringExtra("token"), sendMessage, intent.getStringExtra("contactUserName"), intent.getStringExtra("contactId"), intent.getStringExtra("userName"));
                         binding.message.setText("");
                     }
                 }

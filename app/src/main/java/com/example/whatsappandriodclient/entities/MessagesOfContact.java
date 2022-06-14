@@ -10,8 +10,8 @@ public class MessagesOfContact {
     @Embedded
     public Contact contact;
     @Relation(
-            parentColumn = "id",
-            entityColumn = "contactID"
+            parentColumn = "key",
+            entityColumn = "contactKey"
     )
     public List<Message> messages;
 

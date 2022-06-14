@@ -18,15 +18,15 @@ public interface ContactDao {
     @Query("SELECT * FROM contact")
     List<Contact> index();
 
-    @Query("SELECT * FROM contact WHERE id= :id")
-    Contact get(int id);
+    @Query("SELECT * FROM contact WHERE `key`= :key")
+    Contact get(String key);
 
     @Transaction
     @Query("SELECT * FROM contact")
     List<MessagesOfContact> getMessagesOfContact();
 
-    @Query("SELECT * FROM contact WHERE id = (SELECT MAX(id) FROM contact)")
-    Contact getIDMax();
+//    @Query("SELECT * FROM contact WHERE id = (SELECT MAX(id) FROM contact)")
+//    Contact getIDMax();
 
 //    @Transaction
     @Insert  //get list of contact

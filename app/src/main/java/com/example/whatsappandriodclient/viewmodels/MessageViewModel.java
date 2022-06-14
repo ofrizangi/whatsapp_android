@@ -13,7 +13,7 @@ public class MessageViewModel extends ViewModel {
         this.messageRepository = new MessageRepository();
     }
 
-    public void addMessage(String token , SendMessage message, String contactName, int contactId, String userName){
+    public void addMessage(String token , SendMessage message, String contactName, String contactId, String userName){
         this.messageRepository.addMessage(message, token, contactName, contactId, userName);
     }
 

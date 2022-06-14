@@ -37,7 +37,7 @@ public class MessageAPI {
         return instance;
     }
 
-    public void sendMessage(SendMessage message, String token, String contactName, ContactDao contactDao, int id, String userName) {
+    public void sendMessage(SendMessage message, String token, String contactName, ContactDao contactDao, String id, String userName) {
         Call<Void> call = this.webServiceAPI.sendMessage("Bearer " + token, contactName, message);
         call.enqueue(new Callback<Void>() {
             @Override

@@ -3,27 +3,23 @@ package com.example.whatsappandriodclient.entities;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
 //, primaryKeys = {"contactUserName","userID"}
 @Entity(tableName = "contact")
 public class Contact {
 
-    @PrimaryKey(autoGenerate = true)
-   //@SerializedName("id")
-    //@ColumnInfo(name= "id")
-      private int id;
-//    @SerializedName("contactUserName")
-//    @ColumnInfo(name= "contactUserName")
+    @PrimaryKey
+    @NonNull
+      private String key;
+
     @NonNull
     private String contactUserName;
-//    @SerializedName("contactNickName")
-//    @ColumnInfo(name= "contactNickName")
+
     private String contactNickName;
-//    @SerializedName("server")
-//    @ColumnInfo(name= "server")
+
     private String server;
     @NonNull
     private String userID;
-
 
     private String lastDate;
 
@@ -31,14 +27,14 @@ public class Contact {
 
 
 
-    public Contact( @NonNull String contactUserName, String contactNickName, String server, @NonNull String userID, String lastMessage, String lastDate, int ID) {
+    public Contact(@NonNull String key, @NonNull String contactUserName, String contactNickName, String server, @NonNull String userID, String lastMessage, String lastDate) {
         this.lastMessage = lastMessage;
         this.lastDate = lastDate;
         this.contactUserName = contactUserName;
         this.contactNickName = contactNickName;
         this.server = server;
         this.userID = userID;
-        this.id = ID;
+        this.key = key;
     }
     public Contact(){}
 
@@ -66,9 +62,6 @@ public class Contact {
         return lastMessage;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public String getContactUserName() {
         return contactUserName;
@@ -82,12 +75,14 @@ public class Contact {
         return server;
     }
 
-
-
-    public void setId(int id) {
-        this.id = id;
+    @NonNull
+    public String getKey() {
+        return key;
     }
 
+    public void setKey(@NonNull String key) {
+        this.key = key;
+    }
 
     public void setContactUserName(@NonNull String contactUserName) {
         this.contactUserName = contactUserName;
