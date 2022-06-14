@@ -28,6 +28,9 @@ public interface ContactDao {
     @Query("SELECT * FROM contact")
     List<MessagesOfContact> getMessagesOfContact();
 
+    @Query("SELECT * FROM contact WHERE id = (SELECT MAX(id) FROM contact)")
+    Contact getIDMax();
+
 //    @Transaction
     @Insert  //get list of contact
     void insert(Contact... contacts);

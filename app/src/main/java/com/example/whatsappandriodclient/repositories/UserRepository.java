@@ -62,7 +62,6 @@ public class UserRepository {
     }
 
 
-
     class ContactListData extends MutableLiveData<List<Contact>> {
 
         public ContactListData(){
@@ -87,8 +86,15 @@ public class UserRepository {
 
     public List<Contact> insertContactsToDao(List<ContactGet> contactGets){
         List<Contact> contacts = new ArrayList<>();
+        Contact c = contactDao.getIDMax();
+        int id;
+        if (c == null) {
+            id =1;
+        }else {
+            id = c.getId() +1;
+        }
         for(ContactGet contact: contactGets){
-            contacts.add(new Contact(contact.getId(), contact.getName(), contact.getServer(), userName));
+            contacts.add(new Contact(contact.getId(), contact.getName(), contact.getServer(), userName, id++));
         }
         List<Contact> contactList = join();
         contactDao.deleteMany(contactList);

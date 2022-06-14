@@ -7,9 +7,10 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "contact")
 public class Contact {
 
-    @PrimaryKey(autoGenerate = true)
+//    @PrimaryKey(autoGenerate = true)
    //@SerializedName("id")
     //@ColumnInfo(name= "id")
+    @PrimaryKey
       private int id;
 //    @SerializedName("contactUserName")
 //    @ColumnInfo(name= "contactUserName")
@@ -33,12 +34,14 @@ public class Contact {
     }
 
 
-    public Contact( @NonNull String contactUserName, String contactNickName, String server, @NonNull String userID) {
+    public Contact( @NonNull String contactUserName, String contactNickName, String server, @NonNull String userID,@NonNull  int ID) {
         this.contactUserName = contactUserName;
         this.contactNickName = contactNickName;
         this.server = server;
         this.userID = userID;
+        this.id = ID;
     }
+    public Contact(){}
 
     public int getId() {
         return id;
