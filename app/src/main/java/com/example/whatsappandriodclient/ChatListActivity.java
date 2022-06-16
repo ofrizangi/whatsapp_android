@@ -14,6 +14,7 @@ import com.example.whatsappandriodclient.databinding.ActivityChatListBinding;
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.viewmodels.UserViewModel;
 import com.example.whatsappandriodclient.viewmodels.UserViewModelFactory;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,14 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
         if(intent.hasExtra("userName")){
             Log.i("chat", intent.getStringExtra("userName"));
         }
+
+
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(ChatListActivity.this, instanceIdResult -> {
+            String newToken = instanceIdResult.getToken();
+            Log.i("token firebase", newToken);
+        });
+
 
         viewModel = new ViewModelProvider(this, new UserViewModelFactory(intent.getStringExtra("userName"))).get(UserViewModel.class);
         viewModel.getAllContacts(intent.getStringExtra("token"));
