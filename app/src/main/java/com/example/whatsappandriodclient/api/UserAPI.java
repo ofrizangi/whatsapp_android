@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.whatsappandriodclient.AddContactActivity;
 import com.example.whatsappandriodclient.ChatListActivity;
 import com.example.whatsappandriodclient.LoginActivity;
 import com.example.whatsappandriodclient.RegisterActivity;
@@ -13,6 +14,7 @@ import com.example.whatsappandriodclient.dao.UserDao;
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.User;
 import com.example.whatsappandriodclient.objectAPI.ContactGet;
+import com.example.whatsappandriodclient.objectAPI.TokenApplication;
 import com.example.whatsappandriodclient.objectAPI.UserLogin;
 import com.example.whatsappandriodclient.objectAPI.UserRegister;
 import com.example.whatsappandriodclient.repositories.UserRepository;
@@ -158,6 +160,26 @@ public class UserAPI {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+                Log.i("in fail", "fail");
+            }
+        });
+
+    }
+
+    public void sendToken(TokenApplication tokenApplication, String tokenUser) {
+        Call<Void> call = this.webServiceAPI.sendToken("Bearer " + tokenUser, tokenApplication);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()) {
+                    Log.i("in response", "succeed");
+                }
+                else{
+                    Log.i("in response", "faild");
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
                 Log.i("in fail", "fail");
             }
         });

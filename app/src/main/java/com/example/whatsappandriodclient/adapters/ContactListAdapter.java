@@ -79,7 +79,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             LocalDB localDB = LocalDB.getDatabase(ChatListActivity.getInstance());
             UserDao userDao = localDB.userDao();
             User user = userDao.get(current.getContactUserName());
-            if(user.getImage() != ""){
+            if(user != null && user.getImage() != ""){
                 Uri uri = Uri.parse(user.getImage());
 //                contactViewHolder.image.setImageURI(uri);
 //                contactViewHolder.image.setImageURI(Uri.parse(new File(user.getImage()).toString()));

@@ -7,6 +7,7 @@ import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
 import com.example.whatsappandriodclient.objectAPI.GetMessage;
 import com.example.whatsappandriodclient.objectAPI.Invitation;
 import com.example.whatsappandriodclient.objectAPI.SendMessage;
+import com.example.whatsappandriodclient.objectAPI.TokenApplication;
 import com.example.whatsappandriodclient.objectAPI.Transfer;
 import com.example.whatsappandriodclient.objectAPI.UserLogin;
 import com.example.whatsappandriodclient.objectAPI.UserRegister;
@@ -24,17 +25,17 @@ import retrofit2.http.Path;
 
 public interface WebServiceAPI {
 
-     @GET("user/get")
-     Call<List<UserRegister>> getUser();
+    @GET("user/get")
+    Call<List<UserRegister>> getUser();
 
-     @POST("user/register")
-     Call<String> createUser(@Body UserRegister user);
+    @POST("user/register")
+    Call<String> createUser(@Body UserRegister user);
 
-     @POST("user/login")
-     Call<String> sendUser(@Body UserLogin userLogin);
+    @POST("user/login")
+    Call<String> sendUser(@Body UserLogin userLogin);
 
-     @POST("contacts")
-     Call<Void> addContact(@Header("authorization") String token, @Body ContactToAdd contactToAdd);
+    @POST("contacts")
+    Call<Void> addContact(@Header("authorization") String token, @Body ContactToAdd contactToAdd);
 
     @GET("contacts")
     Call<List<ContactGet>> getAllContacts(@Header("authorization") String token);
@@ -54,7 +55,10 @@ public interface WebServiceAPI {
     @POST("transfer")
     Call<Void> transferMessage(@Body Transfer transfer);
 
+    //    Call<Void> sendToken(@Header("authorization") String tokenApplication,@Body String tokenUser);
+    @POST("firebase")
+    Call<Void> sendToken(@Header("authorization") String tokenUser, @Body TokenApplication tokenApplication);
+//    Call<Void> sendToken(@Header("authorization") String tokenApplication);
+
 
 }
-
-

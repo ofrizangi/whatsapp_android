@@ -29,7 +29,7 @@ public class ChatActivity extends AppCompatActivity {
     private ContactViewModel viewModelContact;
     private UserViewModel userViewModel;
     private ActivityChatBinding binding;
-
+    private MessagesService messagesService;
     private static ChatActivity sInstance;
     MessageListAdapter adapter;
 
@@ -59,6 +59,11 @@ public class ChatActivity extends AppCompatActivity {
 
         viewModelContact.updateMessages(intent.getStringExtra("token"), intent.getStringExtra("contactUserName"));
 
+
+        messagesService = new MessagesService(viewModel, viewModelContact,intent.getStringExtra("token"),
+                intent.getStringExtra("contactUserName"),intent.getStringExtra("contactId"),
+                intent.getStringExtra("userName"));
+
         binding.contactname.setText(intent.getStringExtra("contactNickName"));
         Log.i("token", intent.getStringExtra("token"));
 
@@ -70,7 +75,6 @@ public class ChatActivity extends AppCompatActivity {
                         binding.message.setText("");
                         Message message = new Message(sendMessage.getContent(), new Date(), true, intent.getStringExtra("contactId"));
                         viewModelContact.addMessageToView(message);
-//                        userViewModel.setContactView();
                     }
                 }
         );

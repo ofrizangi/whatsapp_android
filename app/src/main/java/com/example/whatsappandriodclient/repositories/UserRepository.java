@@ -11,6 +11,7 @@ import com.example.whatsappandriodclient.dao.UserDao;
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.ContactsOfUser;
 import com.example.whatsappandriodclient.objectAPI.ContactGet;
+import com.example.whatsappandriodclient.objectAPI.TokenApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,5 +129,7 @@ public class UserRepository {
 //        this.contactDao.insert(contact1);
 //
 //    }
-
+public void sendTokenToServer(TokenApplication tokenApplication, String tokenUser){
+        api.sendToken(tokenApplication,tokenUser);
+    }
 }
