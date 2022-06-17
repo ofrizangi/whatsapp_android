@@ -43,7 +43,6 @@
                 android:id="@+id/contactname"
                 android:layout_width="234dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/prompt_username"
                 android:paddingLeft="10dp"
                 android:textColor="#090808"
                 android:textSize="24sp"
@@ -55,7 +54,6 @@
                 android:id="@+id/lastmessage"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:hint="message"
                 android:minHeight="48dp"
                 android:paddingLeft="10dp"
                 android:textColor="#090808"
@@ -70,7 +68,6 @@
             android:layout_width="99dp"
             android:layout_height="32dp"
             android:layout_gravity="center"
-            android:hint="time"
             android:textColor="#090808"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

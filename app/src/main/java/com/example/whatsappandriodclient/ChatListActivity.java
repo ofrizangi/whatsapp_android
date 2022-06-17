@@ -36,12 +36,6 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
         return contacts;
     }
 
-//    public void setContacts(List<Contact> contacts) {
-//        this.contacts = contacts;
-//        adapter.setContacts(contacts);
-//
-//
-//    }
 
     private List<Contact> contacts;
     ContactListAdapter adapter;

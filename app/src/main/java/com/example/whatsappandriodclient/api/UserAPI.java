@@ -6,10 +6,14 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.whatsappandriodclient.ChatActivity;
 import com.example.whatsappandriodclient.ChatListActivity;
+import com.example.whatsappandriodclient.LocalDB;
 import com.example.whatsappandriodclient.LoginActivity;
 import com.example.whatsappandriodclient.RegisterActivity;
+import com.example.whatsappandriodclient.dao.AppDao;
 import com.example.whatsappandriodclient.dao.UserDao;
+import com.example.whatsappandriodclient.entities.App;
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.User;
 import com.example.whatsappandriodclient.objectAPI.ContactGet;
@@ -34,8 +38,11 @@ public class UserAPI {
     WebServiceAPI webServiceAPI;
 
     public UserAPI() {
+        LocalDB localDB = LocalDB.getDatabase(ChatActivity.getInstance());
+        AppDao appDao = localDB.appDao();
+        List<App> list = appDao.index();
         retrofit = new Retrofit.Builder()
-                    .baseUrl("http://10.0.2.2:5271/api/")
+                .baseUrl(list.get(0).getServer())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -43,10 +50,7 @@ public class UserAPI {
     }
 
     public static synchronized UserAPI getInstance() {
-        if (instance == null) {
-            instance = new UserAPI();
-        }
-        return instance;
+        return new UserAPI();
     }
 
     public WebServiceAPI getMyApi() {

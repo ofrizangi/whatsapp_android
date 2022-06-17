@@ -7,7 +7,10 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.whatsappandriodclient.AddContactActivity;
 import com.example.whatsappandriodclient.ChatActivity;
+import com.example.whatsappandriodclient.LocalDB;
+import com.example.whatsappandriodclient.dao.AppDao;
 import com.example.whatsappandriodclient.dao.ContactDao;
+import com.example.whatsappandriodclient.entities.App;
 import com.example.whatsappandriodclient.entities.Message;
 import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
 import com.example.whatsappandriodclient.objectAPI.GetMessage;
@@ -33,11 +36,14 @@ public class ContactAPI {
 
 
     public ContactAPI() {
+        LocalDB localDB = LocalDB.getDatabase(ChatActivity.getInstance());
+        AppDao appDao = localDB.appDao();
+        List<App> list = appDao.index();
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd hh:mm:ss")
                 .create();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:5271/api/")
+                .baseUrl(list.get(0).getServer())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
@@ -45,10 +51,7 @@ public class ContactAPI {
     }
 
     public static synchronized ContactAPI getInstance() {
-        if (instance == null) {
-            instance = new ContactAPI();
-        }
-        return instance;
+        return new ContactAPI();
     }
 
     public WebServiceAPI getMyApi() {

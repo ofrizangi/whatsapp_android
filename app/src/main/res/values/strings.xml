@@ -19,12 +19,12 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_register">RegisterActivity</string>
-    <string name="BaseUrl">https://10.0.2.2:7271/api/</string>
-
+    <string name="BaseUrl">http://10.0.2.2:5271/api/</string>
     <string name="url">localhost:5271</string>
 
     <string name="add_image"> <u>add image</u></string>
     <string name="server">Server</string>
     <string name="add_contact">Add Contact</string>
+    <string name="write_a_message">Write a message</string>
 
 </resources>

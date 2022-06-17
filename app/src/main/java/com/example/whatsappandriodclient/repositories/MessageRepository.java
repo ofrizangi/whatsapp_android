@@ -2,8 +2,8 @@ package com.example.whatsappandriodclient.repositories;
 
 import android.util.Log;
 
+import com.example.whatsappandriodclient.ChatActivity;
 import com.example.whatsappandriodclient.LocalDB;
-import com.example.whatsappandriodclient.LoginActivity;
 import com.example.whatsappandriodclient.api.MessageAPI;
 import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.dao.MessageDao;
@@ -24,7 +24,7 @@ public class MessageRepository {
 
     public MessageRepository(){
 
-        LocalDB db = LocalDB.getDatabase(LoginActivity.getInstance());
+        LocalDB db = LocalDB.getDatabase(ChatActivity.getInstance());
         this.messageDao = db.messageDao();
         this.contactDao = db.contactDao();
         this.api = MessageAPI.getInstance();

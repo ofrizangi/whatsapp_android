@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.whatsappandriodclient.R;
 import com.example.whatsappandriodclient.entities.Message;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 
@@ -25,11 +27,13 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     class MessageViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView message;
+        private final TextView time;
 
         private MessageViewHolder(View itemView){
             super(itemView);
 
             this.message = itemView.findViewById(R.id.message);
+            this.time = itemView.findViewById(R.id.time);
 
         }
     }
@@ -72,6 +76,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         if(messages != null){
             final Message current = messages.get(position);
             messageViewHolder.message.setText(current.getContent());
+            DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+            messageViewHolder.time.setText(dateFormat.format(current.getTime()));
         }
     }
 

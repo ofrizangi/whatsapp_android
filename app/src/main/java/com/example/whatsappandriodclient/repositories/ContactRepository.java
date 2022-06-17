@@ -4,6 +4,7 @@ package com.example.whatsappandriodclient.repositories;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.whatsappandriodclient.ChatActivity;
 import com.example.whatsappandriodclient.ChatListActivity;
 import com.example.whatsappandriodclient.LocalDB;
 import com.example.whatsappandriodclient.api.ContactAPI;
@@ -35,7 +36,7 @@ public class ContactRepository {
 
     public ContactRepository(String contactKey){
 
-        LocalDB db = LocalDB.getDatabase(ChatListActivity.getInstance());
+        LocalDB db = LocalDB.getDatabase(ChatActivity.getInstance());
         this.contactDao = db.contactDao();
         this.api = ContactAPI.getInstance();
         this.messageDao = db.messageDao();
@@ -100,11 +101,6 @@ public class ContactRepository {
         public MessagListData() {
             super();
             this.messages = join();
-//            List<Message> messages = new ArrayList<>();
-//            messages.add(new Message("hy", new Date(), true, 1));
-//            messages.add(new Message("gy", new Date(), true, 1));
-//            messages.add(new Message("ty", new Date(), true, 1));
-//            messages.add(new Message("ey", new Date(), true, 1));
             setValue(messages);
             // every time we will do set it will call all the observers
         }
@@ -124,18 +120,6 @@ public class ContactRepository {
     }
 
 
-//    class ContactListData extends MutableLiveData<List<Contact>> {
-//        public ContactListData(){
-//            super();
-//            List<Contact> contacts = contactDao.index();
-//            // every time we will do set it will call all the observers
-//            setValue(contacts);
-//        }
-//    }
-
-//    public LiveData<List<Contact>> getAll(){
-//        return this.contactListData;
-//    }
 
     public void addContact(ContactToAdd contact, String token, String userName, Invitation invitation){
         this.api.addContact(contact, token, userName, invitation, contactDao);

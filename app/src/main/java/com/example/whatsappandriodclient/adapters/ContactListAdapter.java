@@ -1,7 +1,6 @@
 package com.example.whatsappandriodclient.adapters;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import com.example.whatsappandriodclient.LocalDB;
 import com.example.whatsappandriodclient.R;
 import com.example.whatsappandriodclient.dao.UserDao;
 import com.example.whatsappandriodclient.entities.Contact;
-import com.example.whatsappandriodclient.entities.User;
 
 import java.util.List;
 
@@ -36,12 +34,12 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             this.time = itemView.findViewById(R.id.time);
             this.lastmessage = itemView.findViewById(R.id.lastmessage);
             this.image = itemView.findViewById(R.id.imageView);
-//            this.image = itemView.findViewById(R.id.imageView);
-//            this.image.setClipToOutline(true);
+
             this.onContactListener = onMessageListener;
 
             itemView.setOnClickListener(this);
         }
+
 
         @Override
         public void onClick(View view) {
@@ -64,6 +62,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         return new ContactViewHolder(itemView, this.onContactListener);
     }
 
+
     @Override
     public void onBindViewHolder(ContactViewHolder contactViewHolder, int position){
         if(contacts != null){
@@ -78,17 +77,17 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             }
             LocalDB localDB = LocalDB.getDatabase(ChatListActivity.getInstance());
             UserDao userDao = localDB.userDao();
-            User user = userDao.get(current.getContactUserName());
-            if(user.getImage() != ""){
-                Uri uri = Uri.parse(user.getImage());
-//                contactViewHolder.image.setImageURI(uri);
-//                contactViewHolder.image.setImageURI(Uri.parse(new File(user.getImage()).toString()));
-//                holder.imgUserPhoto.setImageURI();
-
-//                Glide.with(context)
-//                        .load(new File(uri.getPath()))
-//                        .into(imageView);
-            }
+//            User user = userDao.get(current.getContactUserName());
+//            if(user.getImage() != ""){
+//                Uri uri = Uri.parse(user.getImage());
+////                contactViewHolder.image.setImageURI(uri);
+////                contactViewHolder.image.setImageURI(Uri.parse(new File(user.getImage()).toString()));
+////                holder.imgUserPhoto.setImageURI();
+//
+////                Glide.with(context)
+////                        .load(new File(uri.getPath()))
+////                        .into(imageView);
+//            }
 
 
             contactViewHolder.lastmessage.setText(current.getLastMessage());

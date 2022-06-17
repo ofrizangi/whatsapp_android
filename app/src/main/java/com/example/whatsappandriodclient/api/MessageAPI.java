@@ -4,10 +4,15 @@ import android.app.AlertDialog;
 import android.util.Log;
 
 import com.example.whatsappandriodclient.ChatActivity;
+import com.example.whatsappandriodclient.LocalDB;
+import com.example.whatsappandriodclient.dao.AppDao;
 import com.example.whatsappandriodclient.dao.ContactDao;
+import com.example.whatsappandriodclient.entities.App;
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.objectAPI.SendMessage;
 import com.example.whatsappandriodclient.objectAPI.Transfer;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,8 +28,11 @@ public class MessageAPI {
     WebServiceAPI webServiceAPI;
 
     public MessageAPI() {
+        LocalDB localDB = LocalDB.getDatabase(ChatActivity.getInstance());
+        AppDao appDao = localDB.appDao();
+        List<App> list = appDao.index();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:5271/api/")
+                .baseUrl(list.get(0).getServer())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -32,10 +40,7 @@ public class MessageAPI {
     }
 
     public static synchronized MessageAPI getInstance() {
-        if (instance == null) {
-            instance = new MessageAPI();
-        }
-        return instance;
+        return new MessageAPI();
     }
 
     public void sendMessage(SendMessage message, String token, String contactName, ContactDao contactDao, String id, String userName) {
@@ -44,7 +49,6 @@ public class MessageAPI {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()) {
-
                     Contact contact = contactDao.get(id);
                     TransferAPI transferAPI = new TransferAPI(contact.getServer());
                     Transfer transfer = new Transfer(userName, contactName, message.getContent());

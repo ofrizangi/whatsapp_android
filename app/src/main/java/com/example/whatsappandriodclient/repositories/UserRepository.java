@@ -79,14 +79,6 @@ public class UserRepository {
             // every time we will do set it will call all the observers
         }
 
-//        @Override
-//        protected void onActive(){
-//            super.onActive();
-//
-//            new Thread(() -> {
-//                contactListData.postValue(contactDao.get());
-//            }).start();
-//        }
 
     }
 

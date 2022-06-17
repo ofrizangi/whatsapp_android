@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(AppViewModel.class);
 
+
         viewModel.updateUsers();
 
         binding.link.setOnClickListener(v ->{
@@ -47,6 +48,14 @@ public class LoginActivity extends AppCompatActivity {
                     String password = binding.password.getText().toString();
                     UserLogin myUser = new UserLogin(userName, password);
                     viewModel.sendUser(myUser);
+                }
+        );
+
+
+        binding.goToSetting.setOnClickListener(v ->{
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+
+            startActivity(intent);
                 }
         );
     }

@@ -9,10 +9,12 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.example.whatsappandriodclient.dao.AppDao;
 import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.dao.Converters;
 import com.example.whatsappandriodclient.dao.MessageDao;
 import com.example.whatsappandriodclient.dao.UserDao;
+import com.example.whatsappandriodclient.entities.App;
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.Message;
 import com.example.whatsappandriodclient.entities.User;
@@ -22,13 +24,14 @@ import com.example.whatsappandriodclient.entities.User;
 //@Database(version = 3, entities = {Message.class} , autoMigrations = {
 //        @AutoMigration(from = 2, to = 3)}, exportSchema = false)
 
-@Database(entities = {Contact.class, Message.class, User.class}, version = 1, exportSchema = false)
+@Database(entities = {Contact.class, Message.class, User.class, App.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class LocalDB extends RoomDatabase {
 
     public abstract ContactDao contactDao();
     public abstract MessageDao messageDao();
     public abstract UserDao userDao();
+    public abstract AppDao appDao();
 
     private static volatile LocalDB INSTANCE;
 
@@ -37,7 +40,7 @@ public abstract class LocalDB extends RoomDatabase {
             synchronized (LocalDB.class) {
                 if (INSTANCE == null) {
                     INSTANCE = databaseBuilder(context,
-                                    LocalDB.class, "milion3")
+                                    LocalDB.class, "million6")
                             .allowMainThreadQueries()
                             .build();
                 }
