@@ -6,13 +6,18 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.whatsappandriodclient.ChatActivity;
 import com.example.whatsappandriodclient.ChatListActivity;
+import com.example.whatsappandriodclient.LocalDB;
 import com.example.whatsappandriodclient.LoginActivity;
 import com.example.whatsappandriodclient.RegisterActivity;
+import com.example.whatsappandriodclient.dao.AppDao;
 import com.example.whatsappandriodclient.dao.UserDao;
+import com.example.whatsappandriodclient.entities.App;
 import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.User;
 import com.example.whatsappandriodclient.objectAPI.ContactGet;
+import com.example.whatsappandriodclient.objectAPI.TokenApplication;
 import com.example.whatsappandriodclient.objectAPI.UserLogin;
 import com.example.whatsappandriodclient.objectAPI.UserRegister;
 import com.example.whatsappandriodclient.repositories.UserRepository;
