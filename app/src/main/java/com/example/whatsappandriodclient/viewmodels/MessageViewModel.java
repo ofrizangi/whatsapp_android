@@ -16,5 +16,7 @@ public class MessageViewModel extends ViewModel {
     public void addMessage(String token , SendMessage message, String contactName, String contactId, String userName){
         this.messageRepository.addMessage(message, token, contactName, contactId, userName);
     }
+    public void addMessageToDao(SendMessage message , String contactId){
+        this.messageRepository.addMessageToDao(message, contactId);}
 
 }
