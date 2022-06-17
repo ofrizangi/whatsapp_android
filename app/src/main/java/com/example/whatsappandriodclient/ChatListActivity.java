@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.whatsappandriodclient.adapters.ContactListAdapter;
 import com.example.whatsappandriodclient.databinding.ActivityChatListBinding;
 import com.example.whatsappandriodclient.entities.Contact;
+import com.example.whatsappandriodclient.objectAPI.TokenApplication;
 import com.example.whatsappandriodclient.viewmodels.UserViewModel;
 import com.example.whatsappandriodclient.viewmodels.UserViewModelFactory;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -60,8 +61,10 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
 
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(ChatListActivity.this, instanceIdResult -> {
-            String newToken = instanceIdResult.getToken();
-            Log.i("token firebase", newToken);
+//            String newToken = instanceIdResult.getToken();
+            TokenApplication tokenApplication= new TokenApplication(instanceIdResult.getToken());
+            viewModel.sendTokenToServer(tokenApplication,  intent.getStringExtra("token"));
+          Log.i("token firebase", instanceIdResult.getToken());
         });
 
 

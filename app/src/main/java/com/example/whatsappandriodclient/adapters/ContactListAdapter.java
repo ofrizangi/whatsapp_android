@@ -34,12 +34,12 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             this.time = itemView.findViewById(R.id.time);
             this.lastmessage = itemView.findViewById(R.id.lastmessage);
             this.image = itemView.findViewById(R.id.imageView);
-
+//            this.image = itemView.findViewById(R.id.imageView);
+//            this.image.setClipToOutline(true);
             this.onContactListener = onMessageListener;
 
             itemView.setOnClickListener(this);
         }
-
 
         @Override
         public void onClick(View view) {
@@ -61,7 +61,6 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         View itemView = minflater.inflate(R.layout.contact_in_list, parent, false);
         return new ContactViewHolder(itemView, this.onContactListener);
     }
-
 
     @Override
     public void onBindViewHolder(ContactViewHolder contactViewHolder, int position){

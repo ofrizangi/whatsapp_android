@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.whatsappandriodclient.entities.Contact;
+import com.example.whatsappandriodclient.objectAPI.TokenApplication;
 import com.example.whatsappandriodclient.repositories.UserRepository;
 
 import java.util.List;
@@ -31,15 +32,7 @@ public class UserViewModel extends ViewModel {
 
     public Contact getAContact(int position){
         Contact c =contactList.getValue().get(position);
-//          List<Contact> c0 =contactList.getValue();
-//          Contact c = c0.get(position);
-//        @Query("SELECT * FROM contact LIMIT  :position")
-//        LiveData<List<Contact>> getStudents(int position);
 
-        // Query
-//    getStudents(1); // returns the first row of the list
-
-//        Log.i("s","s");
         return c;
     }
     public void setContactView(){
@@ -48,7 +41,10 @@ public class UserViewModel extends ViewModel {
 
     public void getAllContacts(String token){
          this.userRepository.getAllContacts(token);
+    }
 
+    public void sendTokenToServer(TokenApplication tokenApplication, String tokenUser){
+        this.userRepository.sendTokenToServer(tokenApplication,tokenUser);
     }
 
 //    public int getSpecificContactId(int position)

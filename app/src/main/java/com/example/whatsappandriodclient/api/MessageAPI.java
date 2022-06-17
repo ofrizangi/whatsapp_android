@@ -48,6 +48,7 @@ public class MessageAPI {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                boolean r = response.isSuccessful();
                 if(response.isSuccessful()) {
                     Contact contact = contactDao.get(id);
                     TransferAPI transferAPI = new TransferAPI(contact.getServer());

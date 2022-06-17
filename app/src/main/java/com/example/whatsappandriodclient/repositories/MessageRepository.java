@@ -31,8 +31,7 @@ public class MessageRepository {
     }
 
 
-    public void addMessage(final SendMessage message, final String token, final String contactName, final String contactId, final String userName){
-        this.api.sendMessage(message, token, contactName, contactDao, contactId, userName);
+    public void addMessageToDao(final SendMessage message, final String contactId){
         Message message1 = new Message(message.getContent(), new Date(), true, contactId);
         this.messageDao.insert(message1);
         Contact c = this.contactDao.get(contactId);
@@ -42,10 +41,14 @@ public class MessageRepository {
         String s =  sdf.format(date);
         c.setLastDate(s);
         this.contactDao.update(c);
-
-
         List<Message> messageList = this.messageDao.index();
         Log.i("h", "h");
+    }
+
+
+    public void addMessage(final SendMessage message, final String token, final String contactName, final String contactId, final String userName){
+        this.api.sendMessage(message, token, contactName, contactDao, contactId, userName);
+        addMessageToDao( message, contactId);
     }
 
 
