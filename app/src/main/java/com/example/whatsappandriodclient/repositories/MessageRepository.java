@@ -31,9 +31,8 @@ public class MessageRepository {
     }
 
 
-    public void addMessageToDao(final SendMessage message, final String contactId){
-        Message message1 = new Message(message.getContent(), new Date(), true, contactId);
-        this.messageDao.insert(message1);
+    public void addMessageToDao(final Message message, final String contactId){
+        this.messageDao.insert(message);
         Contact c = this.contactDao.get(contactId);
         c.setLastMessage(message.getContent());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
@@ -48,7 +47,8 @@ public class MessageRepository {
 
     public void addMessage(final SendMessage message, final String token, final String contactName, final String contactId, final String userName){
         this.api.sendMessage(message, token, contactName, contactDao, contactId, userName);
-        addMessageToDao( message, contactId);
+        Message message1 = new Message(message.getContent(), new Date(), true, contactId);
+        addMessageToDao( message1, contactId);
     }
 
 

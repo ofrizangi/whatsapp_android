@@ -64,7 +64,7 @@ public class UserRepository {
 
     public void setContactView(){
         this.contactListData.contacts = join();
-        contactListData.setValue(this.contactListData.contacts);
+        contactListData.postValue(this.contactListData.contacts);
     }
 
 

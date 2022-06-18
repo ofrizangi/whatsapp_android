@@ -9,15 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.example.whatsappandriodclient.dao.ContactDao;
-import com.example.whatsappandriodclient.entities.Message;
-import com.example.whatsappandriodclient.objectAPI.SendMessage;
 import com.example.whatsappandriodclient.viewmodels.ContactViewModel;
 import com.example.whatsappandriodclient.viewmodels.MessageViewModel;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
-import java.util.Date;
 
 public class MessagesService extends FirebaseMessagingService {
 
@@ -38,6 +33,9 @@ public class MessagesService extends FirebaseMessagingService {
         this.userName = userName;
     }
 
+
+    public MessagesService() {}
+
 //    @Override
 //    public IBinder onBind(Intent intent) {
 //        // TODO: Return the communication channel to the service.
@@ -47,20 +45,20 @@ public class MessagesService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
-        String userName = message.getData().get("userName");
-        if (userName != this.userName) {
+
+        Log.i("here", "here");
+
         String contact = message.getNotification().getTitle();
         String content = message.getNotification().getBody();
+        String userName = message.getData().get("userName");
 
-        SendMessage sendMessage = new SendMessage(content);
-        messageViewModel.addMessageToDao(sendMessage, contactId);
-        //screen
-        if (contact.equals(this.contactUserName)) {
-//            Message message1 = new Message(sendMessage.getContent(), new Date(), false, contactId);
-//            viewModelContact.addMessageToView(message1);
-        }
-        //notification
-        else {
+        String id = userName + contact;
+
+
+        if(ChatActivity.getInstance() == null || !ChatActivity.getInstance().updateContactFirebase(contact, content)){
+            if(ChatActivity.getInstance() == null){
+                ChatListActivity.getInstance().updateFirebase(content, id);
+            }
             createNotificationChannel();
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -70,9 +68,9 @@ public class MessagesService extends FirebaseMessagingService {
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
             notificationManager.notify(1, builder.build());
         }
+
     }
-        Log.i("recieved", message.getNotification().getBody());
-    }
+
 
     private void createNotificationChannel(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

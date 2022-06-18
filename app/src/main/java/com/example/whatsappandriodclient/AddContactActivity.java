@@ -80,7 +80,7 @@ public class AddContactActivity extends AppCompatActivity {
             if(server.length() < 9){
                 AlertDialog.Builder alert = new AlertDialog.Builder(getApplicationContext());
                 alert.setTitle("error");
-                alert.setMessage("something went wrong");
+                alert.setMessage("server address is to short");
                 alert.create().show();
             }
             List<App> list = viewModelApp.getServer();

@@ -42,7 +42,18 @@ public class ContactRepository {
         this.messageDao = db.messageDao();
         this.contactKey = contactKey;
         this.messagListData = new MessagListData();
+
     }
+
+//    public static boolean setMessagesFirebase(String contactKey, String content){
+//        if (contactKey.equals(this.contactKey)) {
+////            Message message1 = new Message(sendMessage.getContent(), new Date(), false, contactId);
+////            viewModelContact.addMessageToView(message1);
+//        }
+//    }
+
+
+
 
     public ContactRepository(){
         LocalDB db = LocalDB.getDatabase(ChatListActivity.getInstance());
@@ -73,6 +84,7 @@ public class ContactRepository {
         List<Message> myMessageList = join();
         messageDao.deleteMany(myMessageList);
         messageDao.insertMany(newMessageList);
+        this.messagListData.messages = newMessageList;
         return newMessageList;
     }
 
@@ -90,7 +102,7 @@ public class ContactRepository {
 
     public void addMessageToView(Message message){
         this.messagListData.messages.add(message);
-        messagListData.setValue(this.messagListData.messages);
+        messagListData.postValue(this.messagListData.messages);
     }
 
 

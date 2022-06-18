@@ -24,7 +24,7 @@ import com.example.whatsappandriodclient.entities.User;
 //@Database(version = 3, entities = {Message.class} , autoMigrations = {
 //        @AutoMigration(from = 2, to = 3)}, exportSchema = false)
 
-@Database(entities = {Contact.class, Message.class, User.class}, version = 1, exportSchema = false)
+@Database(entities = {Contact.class, Message.class, User.class, App.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class LocalDB extends RoomDatabase {
 
@@ -40,7 +40,7 @@ public abstract class LocalDB extends RoomDatabase {
             synchronized (LocalDB.class) {
                 if (INSTANCE == null) {
                     INSTANCE = databaseBuilder(context,
-                                    LocalDB.class, "million6")
+                                    LocalDB.class, "million8")
                             .allowMainThreadQueries()
                             .build();
                 }

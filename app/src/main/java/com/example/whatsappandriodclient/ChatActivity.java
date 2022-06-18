@@ -36,6 +36,11 @@ public class ChatActivity extends AppCompatActivity {
     public static ChatActivity getInstance() {
         return sInstance;
     }
+
+    public static void setsInstance(){
+        sInstance = null;
+    }
+
     private List<Message> messages;
 
 
@@ -89,4 +94,21 @@ public class ChatActivity extends AppCompatActivity {
                 }
         );
     }
+
+
+    public boolean updateContactFirebase(String contactName, String content){
+        Intent intent = getIntent();
+        String myContactName = intent.getStringExtra("contactUserName");
+        String contactId =  intent.getStringExtra("contactId");
+        Message message1 = new Message(content, new Date(), false, contactId);
+        if(myContactName.equals(contactName)){
+            viewModel.addMessageToDao(message1,contactId );
+            viewModelContact.addMessageToView(message1);
+            return true;
+        }
+        viewModel.addMessageToDao(message1,contactId );
+        return false;
+    }
+
+
 }

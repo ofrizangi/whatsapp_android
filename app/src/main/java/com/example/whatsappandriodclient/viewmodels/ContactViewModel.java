@@ -32,7 +32,6 @@ public class ContactViewModel extends ViewModel {
         return messageList;
     }
 
-
     public void addContact(String token , ContactToAdd contact, String userID, Invitation invitation){
         this.cRepository.addContact(contact,  token, userID, invitation);
     }

@@ -12,18 +12,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.whatsappandriodclient.adapters.ContactListAdapter;
 import com.example.whatsappandriodclient.databinding.ActivityChatListBinding;
 import com.example.whatsappandriodclient.entities.Contact;
+import com.example.whatsappandriodclient.entities.Message;
 import com.example.whatsappandriodclient.objectAPI.TokenApplication;
+import com.example.whatsappandriodclient.viewmodels.MessageViewModel;
 import com.example.whatsappandriodclient.viewmodels.UserViewModel;
 import com.example.whatsappandriodclient.viewmodels.UserViewModelFactory;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ChatListActivity extends AppCompatActivity implements ContactListAdapter.OnContactListener {
 
     private ActivityChatListBinding binding;
     private UserViewModel viewModel;
+    private MessageViewModel messageViewModel;
 
     private static ChatListActivity sInstance;
 
@@ -51,6 +55,9 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
         sInstance = this;
         binding = ActivityChatListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        messageViewModel = new ViewModelProvider(this).get(MessageViewModel.class);
+
 
         Intent intent = getIntent();
         Log.i("chat", intent.getStringExtra("token"));
@@ -100,6 +107,7 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
     @Override
     public void onResume(){
         super.onResume();
+        ChatActivity.setsInstance();
         viewModel.setContactView();
     }
 
@@ -117,6 +125,14 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
         intent.putExtra("userName" , myIntent.getStringExtra("userName"));
         startActivity(intent);
     }
+
+
+    public void updateFirebase(String content, String id){
+        Message message1 = new Message(content, new Date(), false, id);
+        messageViewModel.addMessageToDao(message1,id );
+        viewModel.setContactView();
+    }
+
 
 
 
