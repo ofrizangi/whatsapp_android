@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -71,8 +70,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
-
-
 
     private boolean checkPassAndUser(String password, String confirm, String userName){
         if(password.compareTo(confirm) != 0){

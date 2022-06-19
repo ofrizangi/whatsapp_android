@@ -55,7 +55,7 @@ public class MessagesService extends FirebaseMessagingService {
         String id = userName + contact;
 
 
-        if(ChatActivity.getInstance() == null || !ChatActivity.getInstance().updateContactFirebase(contact, content)){
+        if(ChatActivity.getInstance() == null || !ChatActivity.getInstance().updateContactFirebase(contact, content, id)){
             if(ChatActivity.getInstance() == null){
                 ChatListActivity.getInstance().updateFirebase(content, id, contact);
             }

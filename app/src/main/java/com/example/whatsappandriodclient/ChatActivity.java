@@ -64,7 +64,6 @@ public class ChatActivity extends AppCompatActivity {
 
 
         binding.contactname.setText(intent.getStringExtra("contactNickName"));
-//        Log.i("token", intent.getStringExtra("token"));
 
         binding.sendMessage.setOnClickListener(v -> {
                     String content = binding.message.getText().toString();
@@ -90,7 +89,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-    public boolean updateContactFirebase(String contactName, String content){
+    public boolean updateContactFirebase(String contactName, String content, String Id){
         Intent intent = getIntent();
         String myContactName = intent.getStringExtra("contactUserName");
         String contactId =  intent.getStringExtra("contactId");
@@ -98,11 +97,11 @@ public class ChatActivity extends AppCompatActivity {
         if(myContactName.equals(contactName)){
             viewModel.addMessageToDao(message1,contactId, intent.getStringExtra("token"), contactName );
             viewModelContact.addMessageToView(message1);
-            userViewModel.addContactToDao(contactId,  intent.getStringExtra("token"), contactName);
+            userViewModel.addContactToDao(Id,  intent.getStringExtra("token"), contactName);
             return true;
         }
-        viewModel.addMessageToDao(message1,contactId , intent.getStringExtra("token"), contactName );
-        userViewModel.addContactToDao(contactId,  intent.getStringExtra("token"), contactName);
+        viewModel.addMessageToDao(message1,Id , intent.getStringExtra("token"), contactName );
+        userViewModel.addContactToDao(Id,  intent.getStringExtra("token"), contactName);
         return false;
     }
 
