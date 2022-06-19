@@ -47,7 +47,10 @@ public class UserViewModel extends ViewModel {
         this.userRepository.sendTokenToServer(tokenApplication,tokenUser);
     }
 
-//    public int getSpecificContactId(int position)
+    public void addContactToDao(final String contactId, String token, String contactName){
+        this.userRepository.addContactToDao(contactId, token, contactName);
+    }
+
 
 
 }

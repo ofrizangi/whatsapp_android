@@ -55,10 +55,9 @@ public interface WebServiceAPI {
     @POST("transfer")
     Call<Void> transferMessage(@Body Transfer transfer);
 
-    //    Call<Void> sendToken(@Header("authorization") String tokenApplication,@Body String tokenUser);
     @POST("firebase")
     Call<Void> sendToken(@Header("authorization") String tokenUser, @Body TokenApplication tokenApplication);
-//    Call<Void> sendToken(@Header("authorization") String tokenApplication);
 
-
+    @GET("contacts/{id}")
+    Call<ContactGet> getContact(@Header("authorization") String token, @Path(value = "id") String contactUserName);
 }

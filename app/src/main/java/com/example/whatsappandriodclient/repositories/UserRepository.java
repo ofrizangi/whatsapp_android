@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.whatsappandriodclient.ChatListActivity;
 import com.example.whatsappandriodclient.LocalDB;
+import com.example.whatsappandriodclient.api.ContactAPI;
 import com.example.whatsappandriodclient.api.UserAPI;
 import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.dao.UserDao;
@@ -23,6 +24,7 @@ public class UserRepository {
 //    private ContactDao contactDao;
     private ContactListData contactListData;
     private UserAPI api;
+    private ContactAPI apiContact;
     private List<Contact> contacts;
     private String userName;
 
@@ -47,6 +49,7 @@ public class UserRepository {
 //        this.contactDao = db.contactDao();
         this.contactListData = new ContactListData();
         this.api = UserAPI.getInstance();
+        this.apiContact = ContactAPI.getInstance();
     }
 
 
@@ -65,6 +68,11 @@ public class UserRepository {
     public void setContactView(){
         this.contactListData.contacts = join();
         contactListData.postValue(this.contactListData.contacts);
+    }
+
+
+    public void addContactToDao( final String contactId, String token, String contactName){
+        this.apiContact.getContact(token, contactId, this.contactDao, contactName, this);
     }
 
 

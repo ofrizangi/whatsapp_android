@@ -55,9 +55,6 @@ public class RegisterActivity extends AppCompatActivity {
             startActivityForResult(Intent.createChooser(intent, "Open Gallery"), IMAGE_PICK_CODE);
         });
 
-
-
-
         binding.register.setOnClickListener(v ->{
                     String userName = binding.username.getText().toString();
                     String nickName = binding.nickname.getText().toString();
@@ -118,7 +115,6 @@ public class RegisterActivity extends AppCompatActivity {
                 Uri uri = data.getData();
                 setImage(uri.toString());
                 Uri uri2 = Uri.parse(uri.toString());
-                Log.i("image", uri.toString());
                 binding.imageView.setImageURI(uri2);
             }
         }

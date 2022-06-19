@@ -2,7 +2,6 @@ package com.example.whatsappandriodclient;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +28,6 @@ public class ChatActivity extends AppCompatActivity {
     private ContactViewModel viewModelContact;
     private UserViewModel userViewModel;
     private ActivityChatBinding binding;
-    private MessagesService messagesService;
     private static ChatActivity sInstance;
     MessageListAdapter adapter;
 
@@ -65,12 +63,8 @@ public class ChatActivity extends AppCompatActivity {
         viewModelContact.updateMessages(intent.getStringExtra("token"), intent.getStringExtra("contactUserName"));
 
 
-        messagesService = new MessagesService(viewModel, viewModelContact,intent.getStringExtra("token"),
-                intent.getStringExtra("contactUserName"),intent.getStringExtra("contactId"),
-                intent.getStringExtra("userName"));
-
         binding.contactname.setText(intent.getStringExtra("contactNickName"));
-        Log.i("token", intent.getStringExtra("token"));
+//        Log.i("token", intent.getStringExtra("token"));
 
         binding.sendMessage.setOnClickListener(v -> {
                     String content = binding.message.getText().toString();
@@ -80,6 +74,7 @@ public class ChatActivity extends AppCompatActivity {
                         binding.message.setText("");
                         Message message = new Message(sendMessage.getContent(), new Date(), true, intent.getStringExtra("contactId"));
                         viewModelContact.addMessageToView(message);
+                        userViewModel.addContactToDao(intent.getStringExtra("contactId"), intent.getStringExtra("token"),intent.getStringExtra("contactUserName") );
                     }
                 }
         );
@@ -87,7 +82,6 @@ public class ChatActivity extends AppCompatActivity {
 
         binding.listMessages.setAdapter(adapter);
         binding.listMessages.setLayoutManager(new LinearLayoutManager(this));
-//        List<Message> messages= new ArrayList<>();
 
         viewModelContact.get().observe(this, messages -> {
                     adapter.setMessages(messages);
@@ -102,11 +96,13 @@ public class ChatActivity extends AppCompatActivity {
         String contactId =  intent.getStringExtra("contactId");
         Message message1 = new Message(content, new Date(), false, contactId);
         if(myContactName.equals(contactName)){
-            viewModel.addMessageToDao(message1,contactId );
+            viewModel.addMessageToDao(message1,contactId, intent.getStringExtra("token"), contactName );
             viewModelContact.addMessageToView(message1);
+            userViewModel.addContactToDao(contactId,  intent.getStringExtra("token"), contactName);
             return true;
         }
-        viewModel.addMessageToDao(message1,contactId );
+        viewModel.addMessageToDao(message1,contactId , intent.getStringExtra("token"), contactName );
+        userViewModel.addContactToDao(contactId,  intent.getStringExtra("token"), contactName);
         return false;
     }
 

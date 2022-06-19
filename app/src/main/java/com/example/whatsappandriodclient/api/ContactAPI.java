@@ -11,11 +11,14 @@ import com.example.whatsappandriodclient.LocalDB;
 import com.example.whatsappandriodclient.dao.AppDao;
 import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.entities.App;
+import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.Message;
+import com.example.whatsappandriodclient.objectAPI.ContactGet;
 import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
 import com.example.whatsappandriodclient.objectAPI.GetMessage;
 import com.example.whatsappandriodclient.objectAPI.Invitation;
 import com.example.whatsappandriodclient.repositories.ContactRepository;
+import com.example.whatsappandriodclient.repositories.UserRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -89,13 +92,8 @@ public class ContactAPI {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()) {
-                    Log.i("in response", "succeed");
                 }
                 else{
-//                    AlertDialog.Builder alert = new AlertDialog.Builder(AddContactActivity.getInstance());
-//                    alert.setTitle("error");
-//                    alert.setMessage("something went wrong");
-//                    alert.create().show();
                 }
             }
             @Override
@@ -106,6 +104,33 @@ public class ContactAPI {
 
     }
 
+    public void getContact(String token, String contactId, ContactDao contactDao, String contactName, UserRepository userRepository) {
+        Call<ContactGet> call = this.webServiceAPI.getContact("Bearer " + token, contactName);
+        call.enqueue(new Callback<ContactGet>() {
+            @Override
+            public void onResponse(Call<ContactGet> call, Response<ContactGet> response) {
+                Log.i("in hellll", "in");
+                if(response.isSuccessful()) {
+                    Log.i("in hellloooo", "in");
+                    Contact c = contactDao.get(contactId);
+                    c.setLastDate(response.body().getLastdate());
+                    c.setLastMessage(response.body().getLast());
+                    contactDao.update(c);
+                    userRepository.setContactView();
+                }
+            }
+            @Override
+            public void onFailure(Call<ContactGet> call, Throwable t) {
+                Log.i("in fail", "fail");
+            }
+        });
+
+    }
+
+
+
+
+
     public void getAllMessages(String token, ContactRepository contactRepository, String contactName, MutableLiveData<List<Message>> messages) {
         Call<List<GetMessage>> call = webServiceAPI.getMessages("Bearer " + token, contactName);
         call.enqueue(new Callback<List<GetMessage>>() {
@@ -114,7 +139,6 @@ public class ContactAPI {
                 if(response.isSuccessful()) {
                     // do set value when have mutable elements
                     messages.setValue(contactRepository.insertMessageToRoom(response.body()));
-
                 }
                 else{
                     AlertDialog.Builder alert = new AlertDialog.Builder(ChatActivity.getInstance());

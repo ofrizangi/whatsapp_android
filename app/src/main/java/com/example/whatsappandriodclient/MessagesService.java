@@ -57,7 +57,7 @@ public class MessagesService extends FirebaseMessagingService {
 
         if(ChatActivity.getInstance() == null || !ChatActivity.getInstance().updateContactFirebase(contact, content)){
             if(ChatActivity.getInstance() == null){
-                ChatListActivity.getInstance().updateFirebase(content, id);
+                ChatListActivity.getInstance().updateFirebase(content, id, contact);
             }
             createNotificationChannel();
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)

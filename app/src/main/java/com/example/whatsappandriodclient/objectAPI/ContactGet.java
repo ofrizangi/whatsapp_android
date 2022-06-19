@@ -3,17 +3,12 @@ package com.example.whatsappandriodclient.objectAPI;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.sql.Time;
-import java.util.Date;
-
 public class ContactGet {
     @SerializedName("id")
     @Expose
-    //userName
     private String id;
     @SerializedName("name")
     @Expose
-    //nickName
     private String name;
     @SerializedName("server")
     @Expose

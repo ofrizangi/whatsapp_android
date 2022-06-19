@@ -9,10 +9,8 @@ import android.view.Window;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.databinding.ActivityAddContactBinding;
 import com.example.whatsappandriodclient.entities.App;
-import com.example.whatsappandriodclient.entities.User;
 import com.example.whatsappandriodclient.objectAPI.ContactToAdd;
 import com.example.whatsappandriodclient.objectAPI.Invitation;
 import com.example.whatsappandriodclient.viewmodels.AppViewModel;
@@ -34,8 +32,6 @@ public class AddContactActivity extends AppCompatActivity {
         return sInstance;
     }
 
-    private LocalDB db;
-    private ContactDao contactDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,30 +46,10 @@ public class AddContactActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String token = intent.getStringExtra("token");
-        Log.i("chat", intent.getStringExtra("token"));
 
-        db = LocalDB.getDatabase(getApplicationContext());
 
 
         binding.addcontact.setOnClickListener(v -> {
-
-            User user = new User(binding.nickname.getText().toString(),"ofri","123", "img");
-//            userDao.insert(user);
-
-//            Contact c = new Contact(binding.username.getText().toString(), "sss", "local", "Ofri");
-//            contactDao.insert(c);
-//            Contact c2 = new Contact(binding.username.getText().toString(), "sss", "local", "ofri");
-//            contactDao.insert(c2);
-
-//            int id = c.getId();
-
-//            Message m = new Message("A","A",true,id);
-//            messageDao.insert(m);
-//            List<ContactsOfUser> contact = userDao.getContactsOfUser();
-//            List<Contact> contacts1 = contactDao.index();
-
-//            List<MessagesOfContact> messages = contactDao.getMessagesOfContact();
-
             String nickName = binding.nickname.getText().toString();
             String username = binding.username.getText().toString();
             String server = binding.server.getText().toString();
@@ -86,11 +62,6 @@ public class AddContactActivity extends AppCompatActivity {
             List<App> list = viewModelApp.getServer();
             Invitation invitation = new Invitation(intent.getStringExtra("userName"), username, list.get(1).getServer());
             viewModel.addContact(token, new ContactToAdd(username, nickName, server), intent.getStringExtra("userName"), invitation);
-
-//            viewModel.inviteContact(invitation, server,intent.getStringExtra("token"), username );
-
-
-
         });
 
 
