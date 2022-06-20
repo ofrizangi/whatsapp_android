@@ -17,3 +17,7 @@ Developed by Sivan Jhirad & Ofri Zangi.
 
 Our firebase project - https://console.firebase.google.com/u/0/project/whatsappandriodclient/overview
 
+
+## Features:
+![image](https://user-images.githubusercontent.com/88827751/174685659-dedcb1b7-f8a2-441e-ac56-38ff230ef586.png)
+
