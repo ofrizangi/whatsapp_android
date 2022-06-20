@@ -40,7 +40,7 @@ public abstract class LocalDB extends RoomDatabase {
             synchronized (LocalDB.class) {
                 if (INSTANCE == null) {
                     INSTANCE = databaseBuilder(context,
-                                    LocalDB.class, "million9")
+                                    LocalDB.class, "mywhatsappDB")
                             .allowMainThreadQueries()
                             .build();
                 }
