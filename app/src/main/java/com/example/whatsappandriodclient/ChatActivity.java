@@ -73,7 +73,6 @@ public class ChatActivity extends AppCompatActivity {
                         binding.message.setText("");
                         Message message = new Message(sendMessage.getContent(), new Date(), true, intent.getStringExtra("contactId"));
                         viewModelContact.addMessageToView(message);
-                        userViewModel.addContactToDao(intent.getStringExtra("contactId"), intent.getStringExtra("token"),intent.getStringExtra("contactUserName") );
                     }
                 }
         );
@@ -97,11 +96,9 @@ public class ChatActivity extends AppCompatActivity {
         if(myContactName.equals(contactName)){
             viewModel.addMessageToDao(message1,contactId, intent.getStringExtra("token"), contactName );
             viewModelContact.addMessageToView(message1);
-            userViewModel.addContactToDao(Id,  intent.getStringExtra("token"), contactName);
             return true;
         }
         viewModel.addMessageToDao(message1,Id , intent.getStringExtra("token"), contactName );
-        userViewModel.addContactToDao(Id,  intent.getStringExtra("token"), contactName);
         return false;
     }
 

@@ -6,16 +6,17 @@ import com.example.whatsappandriodclient.api.ContactAPI;
 import com.example.whatsappandriodclient.api.MessageAPI;
 import com.example.whatsappandriodclient.dao.ContactDao;
 import com.example.whatsappandriodclient.dao.MessageDao;
+import com.example.whatsappandriodclient.entities.Contact;
 import com.example.whatsappandriodclient.entities.Message;
 import com.example.whatsappandriodclient.objectAPI.SendMessage;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MessageRepository {
 
     private MessageDao messageDao;
     private ContactDao contactDao;
-    //    private UserRepository.ContactListData contactListData;
     private MessageAPI api;
     private ContactAPI contactAPI;
 
@@ -32,7 +33,13 @@ public class MessageRepository {
 
     public void addMessageToDao(final Message message, final String contactId, String token, String contactName){
         this.messageDao.insert(message);
-//        this.contactAPI.getContact(token, contactId, this.contactDao, contactName, null);
+        Contact c = this.contactDao.get(contactId);
+        c.setLastMessage(message.getContent());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        Date date = new Date();
+        String s =  sdf.format(date);
+        c.setLastDate(s);
+        this.contactDao.update(c);
     }
 
 

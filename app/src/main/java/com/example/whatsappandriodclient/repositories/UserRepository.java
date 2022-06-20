@@ -31,22 +31,10 @@ public class UserRepository {
     public UserRepository(String userName){
         this.userName = userName;
 
-//        LocalDB db = Room.inMemoryDatabaseBuilder(
-//                        InstrumentationRegistry.getContext(),
-//                        LocalDB.class)
-//                .build();
-//        LocalDB db = Room.databaseBuilder(getApplicationContext(), LocalDB.class,  "contact").
-//                allowMainThreadQueries().build();
-
-//        LocalDB  db = Room.databaseBuilder(ChatListActivity.getInstance(), LocalDB.class, "five")
-//                .allowMainThreadQueries()
-//                .build();
-//        contactDao = db.contactDao();
 
         LocalDB db = LocalDB.getDatabase(ChatListActivity.getInstance());
         this.userDao = db.userDao();
         this.contactDao = db.contactDao();
-//        this.contactDao = db.contactDao();
         this.contactListData = new ContactListData();
         this.api = UserAPI.getInstance();
         this.apiContact = ContactAPI.getInstance();
@@ -71,11 +59,6 @@ public class UserRepository {
     }
 
 
-    public void addContactToDao( final String contactId, String token, String contactName){
-        this.apiContact.getContact(token, contactId, this.contactDao, contactName, this);
-    }
-
-
 
     class ContactListData extends MutableLiveData<List<Contact>> {
 
@@ -95,13 +78,6 @@ public class UserRepository {
 
     public List<Contact> insertContactsToDao(List<ContactGet> contactGets){
         List<Contact> contacts = new ArrayList<>();
-//        Contact c = contactDao.getIDMax();
-//        int id;
-//        if (c == null) {
-//            id =1;
-//        }else {
-//            id = c.getId() +1;
-//        }
         for(ContactGet contact: contactGets){
             contacts.add(new Contact(this.userName + contact.getId(), contact.getId(), contact.getName(), contact.getServer(),this.userName,  contact.getLast(), contact.getLastdate()));
         }
@@ -122,13 +98,6 @@ public class UserRepository {
     }
 
 
-
-//    public void addContact(final ContactToAdd contact, final String token, String userID){
-//        this.api.addContact(contact, token);
-//        Contact contact1 = new Contact(contact.getContactName(), contact.getContactNickName(), contact.getServer(), userID);
-//        this.contactDao.insert(contact1);
-//
-//    }
 public void sendTokenToServer(TokenApplication tokenApplication, String tokenUser){
         api.sendToken(tokenApplication,tokenUser);
     }

@@ -27,7 +27,6 @@ public class RegisterActivity extends AppCompatActivity {
         return sInstance;
     }
 
-    // this is not working - need to find the right source
     private String image = "";
 
     @Override

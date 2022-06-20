@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.whatsappandriodclient.ChatListActivity;
 import com.example.whatsappandriodclient.LocalDB;
 import com.example.whatsappandriodclient.R;
-import com.example.whatsappandriodclient.dao.UserDao;
 import com.example.whatsappandriodclient.entities.Contact;
 
 import java.util.List;
@@ -75,19 +74,6 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
                 contactViewHolder.time.setText(myTime);
             }
             LocalDB localDB = LocalDB.getDatabase(ChatListActivity.getInstance());
-            UserDao userDao = localDB.userDao();
-//            User user = userDao.get(current.getContactUserName());
-//            if(user.getImage() != ""){
-//                Uri uri = Uri.parse(user.getImage());
-////                contactViewHolder.image.setImageURI(uri);
-////                contactViewHolder.image.setImageURI(Uri.parse(new File(user.getImage()).toString()));
-////                holder.imgUserPhoto.setImageURI();
-//
-////                Glide.with(context)
-////                        .load(new File(uri.getPath()))
-////                        .into(imageView);
-//            }
-
 
             contactViewHolder.lastmessage.setText(current.getLastMessage());
         }

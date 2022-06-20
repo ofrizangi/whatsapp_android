@@ -67,8 +67,6 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         }
 
         return viewHolder;
-//        View itemView = minflater.inflate(R.layout.message, parent, false);
-//        return new MessageViewHolder(itemView);
     }
 
     @Override

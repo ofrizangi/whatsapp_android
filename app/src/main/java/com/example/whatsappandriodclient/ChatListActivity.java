@@ -59,12 +59,6 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
 
 
         Intent intent = getIntent();
-//        Log.i("chat", intent.getStringExtra("token"));
-//        if(intent.hasExtra("userName")){
-//            Log.i("chat", intent.getStringExtra("userName"));
-//        }
-
-
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(ChatListActivity.this, instanceIdResult -> {
             TokenApplication tokenApplication= new TokenApplication(instanceIdResult.getToken());
@@ -95,8 +89,6 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
                     adapter.setContacts(contacts);
                 }
         );
-
-
     }
 
 
@@ -128,7 +120,8 @@ public class ChatListActivity extends AppCompatActivity implements ContactListAd
         String token = intent.getStringExtra("token");
         Message message1 = new Message(content, new Date(), false, id);
         messageViewModel.addMessageToDao(message1,id , token, contact);
-        viewModel.addContactToDao(id , token, contact);
+        viewModel.setContactView();
+//        viewModel.addContactToDao(id , token, contact);
     }
 
 

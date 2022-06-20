@@ -28,7 +28,6 @@ public class ContactRepository {
 
     private ContactDao contactDao;
     private MessageDao messageDao;
-//    private UserRepository.ContactListData contactListData;
     private ContactAPI api;
     private String contactKey;
     private MessagListData messagListData;
@@ -44,13 +43,6 @@ public class ContactRepository {
         this.messagListData = new MessagListData();
 
     }
-
-//    public static boolean setMessagesFirebase(String contactKey, String content){
-//        if (contactKey.equals(this.contactKey)) {
-////            Message message1 = new Message(sendMessage.getContent(), new Date(), false, contactId);
-////            viewModelContact.addMessageToView(message1);
-//        }
-//    }
 
 
 

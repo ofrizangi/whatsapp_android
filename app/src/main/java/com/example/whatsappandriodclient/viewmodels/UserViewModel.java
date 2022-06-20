@@ -47,9 +47,9 @@ public class UserViewModel extends ViewModel {
         this.userRepository.sendTokenToServer(tokenApplication,tokenUser);
     }
 
-    public void addContactToDao(final String contactId, String token, String contactName){
-        this.userRepository.addContactToDao(contactId, token, contactName);
-    }
+//    public void addContactToDao(final String contactId, String token, String contactName){
+//        this.userRepository.addContactToDao(contactId, token, contactName);
+//    }
 
 
 

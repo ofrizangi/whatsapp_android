@@ -90,7 +90,7 @@ public class UserAPI {
             public void onResponse(Call<List<ContactGet>> call, Response<List<ContactGet>> response) {
                 if(response.isSuccessful()) {
                     List<ContactGet> contactGets = response.body();
-                    contacts.setValue(userRepository.insertContactsToDao(contactGets));
+                    contacts.postValue(userRepository.insertContactsToDao(contactGets));
                 }
                 else{
                     AlertDialog.Builder alert = new AlertDialog.Builder(ChatListActivity.getInstance());
