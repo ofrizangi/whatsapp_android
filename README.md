@@ -11,7 +11,7 @@ Developed by Sivan Jhirad & Ofri Zangi.
 
 ## how to open a firebase project?
 1. go to tools -> firebase
-2. click on cloud messaging -> set on firebase cloud messaging
+2. choose cloud messaging -> set on firebase cloud messaging
 3. click on connect to firebase
 4. when the web page open you will have an option to create a project and connect it to the android studio.
 
