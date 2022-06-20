@@ -19,5 +19,4 @@ Our firebase project - https://console.firebase.google.com/u/0/project/whatsappa
 
 
 ## Features
-![image](https://user-images.githubusercontent.com/88827751/174685713-f2a08b49-5801-456b-bd6e-f29999f1232c.png)
-
+![image](https://user-images.githubusercontent.com/88827751/174685768-e34c9beb-2056-4b67-9dfb-5e7f50d36f2f.png)
