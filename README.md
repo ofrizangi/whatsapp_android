@@ -14,6 +14,7 @@ Developed by Sivan Jhirad & Ofri Zangi.
 2. choose cloud messaging -> set on firebase cloud messaging
 3. click on connect to firebase
 4. when the web page open you will have an option to create a project and connect it to the android studio.
+5. before you run the program - click on Cold Boot Now (in the emulator settings) for the phone you are running. 
 
 Our firebase project - https://console.firebase.google.com/u/0/project/whatsappandriodclient/overview
 
